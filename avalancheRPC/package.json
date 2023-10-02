@@ -1,0 +1,15 @@
+{
+  "name": "avalancherpc",
+  "version": "1.0.0",
+  "description": "Collection of RPC calls to a local avalanche node, replacing avalancheJS sdk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.1"
+  }
+}

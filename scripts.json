@@ -1,0 +1,113 @@
+{
+    "health": "curl -X POST --data '{    "jsonrpc":"2.0",    "id"     :1,    "method" :"health.health"}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health"
+}
+
+
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "avm.send",
+    "params": {
+        "assetID": "AVAX",
+        "amount": 6969,
+        "to": "X-local1ur873jhz9qnaqv5qthk5sn3e8nj3e0kmggalnu",
+        "from": [
+            "X-local1g65uqn6t77p656w64023nh8nd9updzmxyymev2"
+        ],
+        "changeAddr": "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
+        "memo": "hi, mom!",
+        "username": "myUsername",
+        "password": "FuckyourMom@12!"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1: 9650/ext/bc/X
+
+
+//
+
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "avm.getTx",
+    "params": {
+        "txID": "Lei5Vsso3xnEYAzTTQiopA5PrJ1yyWB9VH62JmVxvzJVoZdkZ",
+        "encoding": "json"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1: 9650/ext/bc/X
+
+
+//
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "avm.issueTx",
+    "params": {
+        "tx": "Lei5Vsso3xnEYAzTTQiopA5PrJ1yyWB9VH62JmVxvzJVoZdkZ"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1: 9650/ext/bc/X
+
+
+
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "platform.getBalance",
+    "params": {
+        "addresses": [
+            "P-local1g65uqn6t77p656w64023nh8nd9updzmxyymev2"
+        ]
+    }
+}' -H 'content-type:application/json;' 127.0.0.1: 9650/ext/bc/P
+
+
+  // Request
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "eth_getBalance",
+    "params": [
+        "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
+        "latest"
+    ],
+    "id": 1
+}'  -H 'content-type:application/json;' 127.0.0.1: 9650/ext/bc/C/rpc
+ 
+
+// Request
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "method": "eth_sendTransaction",
+    "params": [
+        {
+            "from": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
+            "to": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
+            "value": "0x5DC"
+        },
+    ],
+    "id": 1
+}' -H 'content-type:application/json;' 127.0.0.1: 9650/ext/bc/C/rpc
+
+
+// 
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "avm.importKey",
+    "params": {
+        "username": "myUsername",
+        "password": "FuckyourMom@12!",
+        "privateKey": "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1: 9650/ext/bc/X
+
+
+// 
+curl -X POST --data '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "avm.getAllBalances",
+    "params": {
+        "address": "X-local1g65uqn6t77p656w64023nh8nd9updzmxyymev2"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1: 9650/ext/bc/X
+
+
+
