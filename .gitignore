@@ -128,3 +128,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# custom
+userInfo.json
+avalancheRPC/userInfo.json
+package-lock.json

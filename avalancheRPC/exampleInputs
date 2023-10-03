@@ -1,0 +1,18 @@
+# evm
+node index.js eth_getChainConfig '{}'
+node index.js eth_getBalance '["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC", "latest"]'
+node index.js eth_sendTransaction '[{"from": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC", "to": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC", "value": "0x5DC"}]'
+
+# avm
+node index.js avm.send '{ "assetID": "AVAX", "amount": 6969, "to": "X-local1ur873jhz9qnaqv5qthk5sn3e8nj3e0kmggalnu", "from": ["X-local1g65uqn6t77p656w64023nh8nd9updzmxyymev2"], "changeAddr": "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u", "memo": "hi, mom!", "username": "myUsername", "password": "FuckyourMom@12!"}'
+node index.js avm.getTx '{"txID": "Lei5Vsso3xnEYAzTTQiopA5PrJ1yyWB9VH62JmVxvzJVoZdkZ", "encoding": "json"}'
+node index.js avm.issueTx '{"tx": "Lei5Vsso3xnEYAzTTQiopA5PrJ1yyWB9VH62JmVxvzJVoZdkZ"}'
+node index.js avm.importKey '{"username": "myUsername", "password": "FuckyourMom@12!", "privateKey": "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"}'
+node index.js avm.getAllBalances '{"address": "X-local1g65uqn6t77p656w64023nh8nd9updzmxyymev2"}'
+
+# platform
+node index.js platform.getBalance '{"addresses": ["P-local1g65uqn6t77p656w64023nh8nd9updzmxyymev2"]}'
+
+
+# misc
+node index.js health.health '{}'

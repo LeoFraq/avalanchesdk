@@ -37,7 +37,7 @@ export async function requestProcessor(methodName, params) {
 
         // Write the exception and duration to the log file
         const logContent = `Method: ${methodName}\nError: ${error.message}\nDuration (ms): ${duration}`;
-        writeToLogFile(`logs/${methodName}.log`, logContent);
+        writeToLogFile(`logs/exceptions/${methodName}.log`, logContent);
 
         // Handle errors here
         // Even though an error occurred, execution can continue
