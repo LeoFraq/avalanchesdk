@@ -30,7 +30,7 @@ export async function sendJsonRpcRequest(method, params, endpoint) {
         return response;
     } catch (error) {
         // Handle errors here
-        console.error('Error:', error.message);
+        console.error(baseURL, 'Error:', error.message);
         throw error
     }
 }
