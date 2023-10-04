@@ -1,6 +1,6 @@
 // const sendJsonRpcRequest = require('./sendJsonRpcRequest');
-import { requestProcessor } from '../../utils/requestProcessor.mjs';
-import { loadOrGenerateUserInfo, verifyUserInfoHasAccount } from '../../utils/loadOrGenerateUserInfo.mjs';
+import { requestProcessor } from '../utils/requestProcessor.mjs';
+import { loadOrGenerateUserInfo, verifyUserInfoHasAccount } from '../utils/loadOrGenerateUserInfo.mjs';
 
 
 
@@ -9,7 +9,7 @@ const args = process.argv.slice(2);
 const assetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 
 // Initialize default values
-let methodName = 'health.health.send';
+let methodName = 'health.health';
 let params = {};
 let iterations = 1
 
