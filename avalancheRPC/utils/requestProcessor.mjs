@@ -10,6 +10,15 @@ import fs from "fs"
 
 // Function to write to a log file
 function writeToLogFile(fileName, content) {
+    // Extract the directory path from the fileName
+    const directory = path.dirname(fileName);
+
+    // Create the directory (and its parent directories) if they don't exist
+    if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory, { recursive: true });
+    }
+
+    // Append the content to the file
     fs.appendFileSync(fileName, content + '\n');
 }
 
