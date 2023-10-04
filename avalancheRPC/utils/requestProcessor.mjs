@@ -1,6 +1,7 @@
 // const sendJsonRpcRequest = require('./sendJsonRpcRequest');
 import { sendJsonRpcRequest } from './sendJsonRpcRequest.mjs';
 import fs from "fs"
+import path from 'path';
 
 // Define the method name and parameters
 // const methodName = 'health'; // Replace with the desired method name

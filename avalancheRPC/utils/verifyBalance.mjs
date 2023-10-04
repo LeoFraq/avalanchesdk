@@ -1,4 +1,6 @@
 
+import { requestProcessor } from './utils/requestProcessor.mjs';
+
 export async function verifyBalance(type, addr) {
 
     switch (type) {

@@ -15,7 +15,6 @@ const main = async () => {
     try {
         let userInfo = loadOrGenerateUserInfo();
         userInfo = verifyUserInfoHasAccount(userInfo);
-        parseCommandLineArgs();
         // params = argv
         // validation
         console.log("Logging balance for user before starting")
