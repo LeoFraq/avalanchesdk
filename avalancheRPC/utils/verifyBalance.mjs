@@ -1,5 +1,5 @@
 
-import { requestProcessor } from './utils/requestProcessor.mjs';
+import { requestProcessor } from './requestProcessor.mjs';
 
 export async function verifyBalance(type, addr) {
 
