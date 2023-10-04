@@ -28,7 +28,8 @@ function writeToLogFile(fileName, content) {
 export async function requestProcessor(methodName, params) {
     const startTime = performance.now();
     try {
-        const result = await sendJsonRpcRequest(methodName, params);
+        let endpoint = getEndpoint(methodName)
+        const result = await sendJsonRpcRequest(methodName, params, endpoint);
 
         // Measure the time after the request completes
         const endTime = performance.now();
@@ -55,3 +56,27 @@ export async function requestProcessor(methodName, params) {
         // Continue with your logic here, if needed
     }
 };
+
+function getEndpoint(methodName) {
+    // Split the methodName string into parts using a period (.) as the separator
+    const parts = methodName.split('.');
+
+    // Check the first part of the endpoint and return the corresponding value
+    switch (parts[0]) {
+        case 'platform':
+            return 'ext/bc/P';
+        case 'avm':
+            return 'ext/bc/X';
+        case 'evm':
+            return 'ext/bc/C'
+        case 'health':
+            return 'ext/health'
+        case 'info':
+            return 'ext/info'
+        case 'keystore':
+            return 'ext/keystore'
+        // Add more cases for other endpoints as needed
+        default:
+            return 'unknown'; // Return a default value if the endpoint is not recognized
+    }
+}

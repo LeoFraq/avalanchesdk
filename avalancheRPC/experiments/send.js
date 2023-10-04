@@ -1,5 +1,5 @@
 // const sendJsonRpcRequest = require('./sendJsonRpcRequest');
-import { requestProcessor } from ' ../utils/requestProcessor.mjs';
+import { requestProcessor } from '../utils/requestProcessor.mjs';
 import { loadOrGenerateUserInfo, verifyUserInfoHasAccount } from '../utils/loadOrGenerateUserInfo.mjs';
 
 import { setupKeys } from '../utils/knownAddresses.mjs';
