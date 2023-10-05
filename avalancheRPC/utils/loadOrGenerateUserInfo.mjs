@@ -49,6 +49,7 @@ export function updateUserInfo(newUserInfo) {
 }
 
 
+
 export async function verifyUserInfoHasAccount(userInfo) {
     if ('account' in userInfo) {
         console.log("userInfo has account already")
@@ -59,14 +60,22 @@ export async function verifyUserInfoHasAccount(userInfo) {
         let r = (Math.random() + 1).toString(36).substring(7);
         let accountName = "myUsername".concat(r)
         let pwd = "SpamTankFoalUnit@12!"
+        // Create account
         // X
         let input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey }
-        let method = "avm.importKey"
+        let method = "keystore.createUser"
         try {
             await requestProcessor(method, input)
             userInfo.account = { accountName, pwd }
-
             updateUserInfo(userInfo)
+        } catch (error) {
+            console.error("Failed to create account")
+        }
+        // X
+        input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey }
+        method = "avm.importKey"
+        try {
+            await requestProcessor(method, input)
         } catch (error) {
             console.error("Failed to import account for private key:", userInfo.privKey)
             throw error;
@@ -76,9 +85,6 @@ export async function verifyUserInfoHasAccount(userInfo) {
         method = "avax.importKey"
         try {
             await requestProcessor(method, input)
-            userInfo.account = { accountName, pwd }
-
-            updateUserInfo(userInfo)
         } catch (error) {
             console.error("Failed to import account for private key:", userInfo.privKey)
             throw error;
@@ -88,9 +94,6 @@ export async function verifyUserInfoHasAccount(userInfo) {
         method = "platform.importKey"
         try {
             await requestProcessor(method, input)
-            userInfo.account = { accountName, pwd }
-
-            updateUserInfo(userInfo)
         } catch (error) {
             console.error("Failed to import account for private key:", userInfo.privKey)
             throw error;
