@@ -62,6 +62,7 @@ function getEndpoint(methodName) {
 
     switch (methodName) {
         case 'platform.getBalance':
+        case 'platform.importKey':
             return 'ext/bc/P';
         case 'avm.send':
         case 'avm.getTx':
@@ -72,11 +73,13 @@ function getEndpoint(methodName) {
             return 'ext/bc/X';
         case 'evm':
         case 'eth_getBalance':
-        case 'eth_getAssetBalance':
         case 'eth_sendTransactions':
         case 'avax':
-        case 'avax.importKey':
             return 'ext/bc/C'
+        case 'eth_getAssetBalance':
+            return '/ext/bc/C/rpc'
+        case 'avax.importKey':
+            return '/ext/bc/C/avax'
         case 'health.health':
             return 'ext/health'
         case 'info':
