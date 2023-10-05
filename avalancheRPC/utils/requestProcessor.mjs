@@ -81,7 +81,7 @@ function getEndpoint(methodName) {
             return 'ext/health'
         case 'info':
             return 'ext/info'
-        case 'keystore':
+        case 'keystore.createUser':
             return 'ext/keystore'
         // Add more cases for other endpoints as needed
         default:
