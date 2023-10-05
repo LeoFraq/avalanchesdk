@@ -73,6 +73,7 @@ function getEndpoint(methodName) {
         case 'eth_getBalance':
         case 'eth_sendTransactions':
         case 'avax':
+        case 'avax.importKey':
             return 'ext/bc/C'
         case 'health.health':
             return 'ext/health'
