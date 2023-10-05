@@ -38,7 +38,7 @@ export async function requestProcessor(methodName, params) {
 
         // Write the result and duration to the log file
         const logContent = `${endpoint} Method: ${methodName}\nResult: ${JSON.stringify(result)}\nDuration (ms): ${duration}`;
-        writeToLogFile(`${methodName}.log`, logContent);
+        writeToLogFile(`logs/${methodName}.log`, logContent);
 
         console.log('Success:', result);
         // Continue with your logic here using the 'result'
