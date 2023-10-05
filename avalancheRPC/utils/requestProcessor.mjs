@@ -69,6 +69,8 @@ function getEndpoint(methodName) {
         case 'avm':
             return 'ext/bc/X';
         case 'evm':
+        case parts[0].startsWith('eth_'):
+        case 'avax':
             return 'ext/bc/C'
         case 'health':
             return 'ext/health'
