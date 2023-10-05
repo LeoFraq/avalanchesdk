@@ -52,7 +52,7 @@ export function updateUserInfo(newUserInfo) {
 export async function verifyUserInfoHasAccount(userInfo) {
     if ('account' in userInfo) {
         console.log("userInfo has account already")
-        return;
+        return userInfo;
     } else {
         console.warn('No account associated, creating one:');
         //  random string

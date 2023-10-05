@@ -68,9 +68,11 @@ function getEndpoint(methodName) {
         case 'avm.issueTx':
         case 'avm.importKey':
         case 'avm.getAllBalances':
+        case 'avm.getBalance':
             return 'ext/bc/X';
         case 'evm':
         case 'eth_getBalance':
+        case 'eth_getAssetBalance':
         case 'eth_sendTransactions':
         case 'avax':
         case 'avax.importKey':
@@ -83,7 +85,8 @@ function getEndpoint(methodName) {
             return 'ext/keystore'
         // Add more cases for other endpoints as needed
         default:
-            return 'unknown'.concat(methodName); // Return a default value if the endpoint is not recognized
+            return 'unknown method: '.concat(methodName); // Return a default value if the endpoint is not recognized
     }
 
 }
+

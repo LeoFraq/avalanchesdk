@@ -39,9 +39,9 @@ async function verifyP(addr) {
     return result
 }
 async function verifyC(addr) {
-    const method = "eth_getBalance"
+    const method = "eth_getAssetBalance"
     const params =
-        [addr, "latest"]
+        [addr, "latest", assetID]
     const result = await requestProcessor(method, params);
     // const hexBalance = "0xYourHexBalanceHere"; // Replace with the hex balance from the JSON-RPC response
     // const decimalBalance = parseInt(hexBalance, 16); // Convert hex to decimal
