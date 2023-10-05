@@ -74,7 +74,7 @@ function getEndpoint(methodName) {
         case 'eth_sendTransactions':
         case 'avax':
             return 'ext/bc/C'
-        case 'health':
+        case 'health.health':
             return 'ext/health'
         case 'info':
             return 'ext/info'
@@ -82,7 +82,7 @@ function getEndpoint(methodName) {
             return 'ext/keystore'
         // Add more cases for other endpoints as needed
         default:
-            return 'unknown'.concat("0", parts[0], "1", parts[1]); // Return a default value if the endpoint is not recognized
+            return 'unknown'.concat(methodName); // Return a default value if the endpoint is not recognized
     }
 
 }
