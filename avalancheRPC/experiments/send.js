@@ -31,8 +31,8 @@ const main = async () => {
             throw new Error('Method name not provided or not found:'.concat(methodName));
         }
         // validation
-        const balance = verifyBalance("X", userInfo["X"])
-        if (balance.result.balance > 0) {
+        const bl = verifyBalance("X", userInfo["X"])
+        if (Number(bl.result.balance) > 0) {
             console.log("Balance:", balance)
             params = {
                 "assetID": assetID,
@@ -54,7 +54,7 @@ const main = async () => {
                 await new Promise(resolve => setTimeout(resolve, 100));
             }
         } else {
-            console.error("Balance is wrong", balance)
+            console.error("Balance is wrong", bl)
         }
 
     } catch (error) {

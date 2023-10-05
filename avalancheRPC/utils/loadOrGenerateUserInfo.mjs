@@ -80,15 +80,15 @@ export async function verifyUserInfoHasAccount(userInfo) {
             console.error("Failed to import account for private key:", userInfo.privKey)
             throw error;
         }
-        // C
-        input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey }
-        method = "avax.importKey"
-        try {
-            await requestProcessor(method, input)
-        } catch (error) {
-            console.error("Failed to import account for private key:", userInfo.privKey)
-            throw error;
-        }
+        // C Returns a 405
+        // input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey }
+        // method = "avax.importKey"
+        // try {
+        //     await requestProcessor(method, input)
+        // } catch (error) {
+        //     console.error("Failed to import account for private key:", userInfo.privKey)
+        //     throw error;
+        // }
         // P
         input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey }
         method = "platform.importKey"
