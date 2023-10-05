@@ -27,8 +27,9 @@ function writeToLogFile(fileName, content) {
 
 export async function requestProcessor(methodName, params) {
     const startTime = performance.now();
+    let endpoint = getEndpoint(methodName)
+
     try {
-        let endpoint = getEndpoint(methodName)
         const result = await sendJsonRpcRequest(methodName, params, endpoint);
 
         // Measure the time after the request completes
@@ -36,7 +37,7 @@ export async function requestProcessor(methodName, params) {
         const duration = endTime - startTime;
 
         // Write the result and duration to the log file
-        const logContent = `Method: ${methodName}\nResult: ${JSON.stringify(result)}\nDuration (ms): ${duration}`;
+        const logContent = `${endpoint} Method: ${methodName}\nResult: ${JSON.stringify(result)}\nDuration (ms): ${duration}`;
         writeToLogFile(`${methodName}.log`, logContent);
 
         console.log('Success:', result);
@@ -47,7 +48,7 @@ export async function requestProcessor(methodName, params) {
         const duration = endTime - startTime;
 
         // Write the exception and duration to the log file
-        const logContent = `Method: ${methodName}\nError: ${error.message}\nDuration (ms): ${duration}`;
+        const logContent = `${endpoint}Method: ${methodName}\nError: ${error.message}\nDuration (ms): ${duration}`;
         writeToLogFile(`logs/exceptions/${methodName}.log`, logContent);
 
         // Handle errors here

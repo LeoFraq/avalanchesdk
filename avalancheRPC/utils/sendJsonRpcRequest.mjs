@@ -6,7 +6,7 @@ const id = 1;
 const contentType = 'application/json';
 
 // Define the base URL for your JSON-RPC endpoint
-
+// "curl -X POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"health.health"}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health"
 // Function to send a JSON-RPC request
 export async function sendJsonRpcRequest(method, params, endpoint) {
     const baseURL = `http://${IP}:${PORT}/${endpoint}`;
