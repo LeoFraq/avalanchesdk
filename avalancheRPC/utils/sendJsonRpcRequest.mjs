@@ -10,14 +10,14 @@ const contentType = 'application/json';
 // Function to send a JSON-RPC request
 export async function sendJsonRpcRequest(method, params, endpoint) {
     const baseURL = `http://${IP}:${PORT}/${endpoint}`;
+    const requestData = {
+        jsonrpc: '2.0',
+        id: id,
+        method: method,
+        params: params,
+    };
 
     try {
-        const requestData = {
-            jsonrpc: '2.0',
-            id: id,
-            method: method,
-            params: params,
-        };
 
         const response = await axios.post(baseURL, requestData, {
             headers: {
@@ -30,7 +30,7 @@ export async function sendJsonRpcRequest(method, params, endpoint) {
         return response.data;
     } catch (error) {
         // Handle errors here
-        console.error(baseURL, 'Error:', error.message);
+        console.error(baseURL, 'Error:', error.message, "With requestData:\n", requestData);
         throw error
     }
 }
