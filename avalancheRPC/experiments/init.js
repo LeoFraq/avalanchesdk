@@ -13,8 +13,8 @@ const assetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 
 const main = async () => {
     try {
-        let userInfo = loadOrGenerateUserInfo();
-        userInfo = verifyUserInfoHasAccount(userInfo);
+        let userInfo = await loadOrGenerateUserInfo();
+        userInfo = await verifyUserInfoHasAccount(userInfo);
         // params = argv
         // validation
         console.log("Logging balance for user before starting")

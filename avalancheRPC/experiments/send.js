@@ -23,23 +23,23 @@ function parseCommandLineArgs() {
 
 const main = async () => {
     try {
-        let userInfo = loadOrGenerateUserInfo();
-        userInfo = verifyUserInfoHasAccount(userInfo);
+        let userInfo = await loadOrGenerateUserInfo();
+        userInfo = await verifyUserInfoHasAccount(userInfo);
         parseCommandLineArgs();
         // params = argv
         if (!methodName) {
             throw new Error('Method name not provided or not found:'.concat(methodName));
         }
         // validation
-        const balance = verifyBalance("X", userInfo.X)
+        const balance = verifyBalance("X", userInfo["X"])
         if (balance.result.balance > 0) {
             console.log("Balance:", balance)
             params = {
                 "assetID": assetID,
                 "amount": 1,
                 "to": setupKeys[1].x,
-                "from": [userInfo.X],
-                "changeAddr": userInfo.X,
+                "from": [userInfo["X"]],
+                "changeAddr": userInfo["X"],
                 "memo": "hi, mom!",
                 "username": userInfo.account.username,
                 "password": userInfo.account.password
