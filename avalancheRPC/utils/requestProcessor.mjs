@@ -48,7 +48,7 @@ export async function requestProcessor(methodName, params) {
         const duration = endTime - startTime;
 
         // Write the exception and duration to the log file
-        const logContent = `${endpoint}Method: ${methodName}\nError: ${error.message}\nDuration (ms): ${duration}`;
+        const logContent = `${endpoint} Method: ${methodName}\nError: ${error.message}\nDuration (ms): ${duration}`;
         writeToLogFile(`logs/exceptions/${methodName}.log`, logContent);
 
         // Handle errors here
@@ -78,6 +78,7 @@ function getEndpoint(methodName) {
             return 'ext/keystore'
         // Add more cases for other endpoints as needed
         default:
-            return 'unknown'; // Return a default value if the endpoint is not recognized
+            return 'unknown'.concat("0", parts[0], "1", parts[1]); // Return a default value if the endpoint is not recognized
     }
+
 }
