@@ -59,17 +59,19 @@ export async function requestProcessor(methodName, params) {
 };
 
 function getEndpoint(methodName) {
-    // Split the methodName string into parts using a period (.) as the separator
-    const parts = methodName.split('.');
 
-    // Check the first part of the endpoint and return the corresponding value
-    switch (parts[0]) {
-        case 'platform':
+    switch (methodName) {
+        case 'platform.getBalance':
             return 'ext/bc/P';
-        case 'avm':
+        case 'avm.send':
+        case 'avm.getTx':
+        case 'avm.issueTx':
+        case 'avm.importKey':
+        case 'avm.getAllBalances':
             return 'ext/bc/X';
         case 'evm':
-        case parts[0].startsWith('eth'):
+        case 'eth_getBalance':
+        case 'eth_sendTransactions':
         case 'avax':
             return 'ext/bc/C'
         case 'health':
