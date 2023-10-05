@@ -27,7 +27,7 @@ export async function sendJsonRpcRequest(method, params, endpoint) {
 
         // Handle the response here
         console.log('Response:', response.data);
-        return response;
+        return response.data;
     } catch (error) {
         // Handle errors here
         console.error(baseURL, 'Error:', error.message);
