@@ -41,6 +41,7 @@ export async function requestProcessor(methodName, params) {
         writeToLogFile(`logs/${methodName}.log`, logContent);
 
         console.log('Success:', result);
+        return result
         // Continue with your logic here using the 'result'
     } catch (error) {
         // Measure the time after the request completes (even in failure)
