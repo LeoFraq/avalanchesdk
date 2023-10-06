@@ -42,8 +42,8 @@ const main = async () => {
                 "from": [userInfo["X"]],
                 "changeAddr": userInfo["X"],
                 "memo": "hi, mom!",
-                "username": userInfo.account.username,
-                "password": userInfo.account.password
+                "username": userInfo.account.accountName,
+                "password": userInfo.account.pwd
             }
             console.log("Params", params)
             // issue tx

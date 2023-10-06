@@ -18,11 +18,11 @@ const main = async () => {
         // params = argv
         // validation
         console.log("Logging balance for user before starting")
-        let balance = verifyBalance("X", userInfo["X"])
+        let balance = await verifyBalance("X", userInfo["X"])
         console.log("X Balance:", balance)
-        balance = verifyBalance("C", userInfo["C"])
+        balance = await verifyBalance("C", userInfo["C"])
         console.log("C Balance:", balance)
-        balance = verifyBalance("P", userInfo["P"])
+        balance = await verifyBalance("P", userInfo["P"])
         console.log("P Balance:", balance)
     } catch (error) {
         console.error('Error occurred:', error.message);
