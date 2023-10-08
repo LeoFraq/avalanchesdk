@@ -39,7 +39,7 @@ const main = async () => {
             // issue tx
             for (let i = 0; i < iterations; i++) {
                 if (i % 2 == 0) {
-                    to = setupKeys[i % 4]
+                    to = setupKeys[i % 4].c
                     params = setXExportParams(bl, userInfo, to)
                     methodName = 'avm.export';
                 }// i is uneven
@@ -47,6 +47,7 @@ const main = async () => {
                     params = setCImportParams(bl, userInfo, to)
                     methodName = 'avax.import';
                 }
+                console.log("Sending request ", methodName, "with params", params)
                 result = await requestProcessor(methodName, params);
                 console.log(i, ": results:", result)
                 await new Promise(resolve => setTimeout(resolve, 100));
@@ -110,6 +111,7 @@ const setCImportParams = (bl, userInfo, to) => {
 
 
 main()
+
 
 
 

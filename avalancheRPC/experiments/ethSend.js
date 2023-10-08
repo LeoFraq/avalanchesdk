@@ -42,7 +42,7 @@ const main = async () => {
                 // Sign the transaction
                 methodName = "eth_signTransaction"
                 result = await requestProcessor(methodName, params, i);
-
+                console.log("eth_sign, result: ", result)
                 // Send the transaction
                 params = sendTransactionParams(result, userInfo)
                 methodName = "eth_sendTransaction"
@@ -50,6 +50,8 @@ const main = async () => {
                 // issue tx
                 // Call the function
                 result = await requestProcessor(methodName, params, i);
+                console.log("eth_send, result: ", result)
+
                 console.log(i, ": results:", result)
                 // Delay for 100ms before the next invocation
                 await new Promise(resolve => setTimeout(resolve, 200));

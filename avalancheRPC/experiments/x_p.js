@@ -39,7 +39,7 @@ const main = async () => {
             // issue tx
             for (let i = 0; i < iterations; i++) {
                 if (i % 2 == 0) {
-                    to = setupKeys[i % 4]
+                    to = setupKeys[i % 4].p
                     params = setXExportParams(bl, userInfo, to)
                     methodName = 'avm.export';
                 }// i is uneven
