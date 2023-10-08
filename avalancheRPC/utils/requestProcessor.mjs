@@ -80,10 +80,12 @@ function getEndpoint(methodName) {
         case 'avax':
             return 'ext/bc/C'
         case 'eth_getAssetBalance':
-            return '/ext/bc/C/rpc'
+        case 'eth_sendTransaction':
+        case 'eth_signTransaction':
+            return 'ext/bc/C/rpc'
         case 'avax.importKey':
         case 'avax.import':
-            return '/ext/bc/C/avax'
+            return 'ext/bc/C/avax'
         case 'health.health':
             return 'ext/health'
         case 'info':

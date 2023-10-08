@@ -38,7 +38,7 @@ const main = async () => {
             params = {
                 "assetID": assetID,
                 "amount": 1,
-                "to": setupKeys[1].x,
+                "to": setupKeys[i % 4].x,
                 "from": [userInfo["X"]],
                 "changeAddr": userInfo["X"],
                 "memo": "hi, mom!",

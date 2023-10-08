@@ -76,7 +76,7 @@ const main = async () => {
 const setXExportParams = (bl, userInfo, to) => {
     console.log("Balance:", bl)
     params = {
-        "assetID": assetID,
+        "assetID": "AVAX",
         "amount": 1,
         "to": to,
         "from": [userInfo["X"]],
