@@ -25,7 +25,7 @@ function writeToLogFile(fileName, content) {
 
 // Measure the time before sending the request
 
-export async function requestProcessor(methodName, params, i = 1) {
+export async function requestProcessor(methodName, params) {
     const startTime = performance.now();
     let endpoint = getEndpoint(methodName)
 
@@ -37,7 +37,7 @@ export async function requestProcessor(methodName, params, i = 1) {
         const duration = endTime - startTime;
 
         // Write the result and duration to the log file
-        const logContent = `${i}: ${endpoint} Method: ${methodName}\nResult: ${JSON.stringify(result)}\nDuration (ms): ${duration}`;
+        const logContent = `${endpoint} Method: ${methodName}\nResult: ${JSON.stringify(result)}\nDuration (ms): ${duration}`;
         writeToLogFile(`logs/${methodName}.log`, logContent);
 
         console.log('Success:', result);
