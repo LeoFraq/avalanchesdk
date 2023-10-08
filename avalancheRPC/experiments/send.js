@@ -49,7 +49,7 @@ const main = async () => {
             // issue tx
             for (let i = 0; i < iterations; i++) {
                 // Call the function
-                const result = await requestProcessor(methodName, params);
+                const result = await requestProcessor(methodName, params, i);
                 console.log(i, ": results:", result)
                 // Delay for 100ms before the next invocation
                 await new Promise(resolve => setTimeout(resolve, 100));

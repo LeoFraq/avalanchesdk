@@ -25,7 +25,7 @@ function writeToLogFile(fileName, content) {
 
 // Measure the time before sending the request
 
-export async function requestProcessor(methodName, params) {
+export async function requestProcessor(methodName, params, i = 1) {
     const startTime = performance.now();
     let endpoint = getEndpoint(methodName)
 
@@ -37,7 +37,7 @@ export async function requestProcessor(methodName, params) {
         const duration = endTime - startTime;
 
         // Write the result and duration to the log file
-        const logContent = `${endpoint} Method: ${methodName}\nResult: ${JSON.stringify(result)}\nDuration (ms): ${duration}`;
+        const logContent = `${i}: ${endpoint} Method: ${methodName}\nResult: ${JSON.stringify(result)}\nDuration (ms): ${duration}`;
         writeToLogFile(`logs/${methodName}.log`, logContent);
 
         console.log('Success:', result);
@@ -64,6 +64,7 @@ function getEndpoint(methodName) {
     switch (methodName) {
         case 'platform.getBalance':
         case 'platform.importKey':
+        case 'platform.importAVAX':
             return 'ext/bc/P';
         case 'avm.send':
         case 'avm.getTx':
@@ -71,6 +72,7 @@ function getEndpoint(methodName) {
         case 'avm.importKey':
         case 'avm.getAllBalances':
         case 'avm.getBalance':
+        case 'avm.export':
             return 'ext/bc/X';
         case 'evm':
         case 'eth_getBalance':
@@ -80,6 +82,7 @@ function getEndpoint(methodName) {
         case 'eth_getAssetBalance':
             return '/ext/bc/C/rpc'
         case 'avax.importKey':
+        case 'avax.import':
             return '/ext/bc/C/avax'
         case 'health.health':
             return 'ext/health'
