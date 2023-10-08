@@ -44,7 +44,7 @@ const main = async () => {
                     methodName = 'avm.export';
                 }// i is uneven
                 else {
-                    params = setCimportParams(bl, userInfo, to)
+                    params = setCImportParams(bl, userInfo, to)
                     methodName = 'avax.import';
                 }
                 result = await requestProcessor(methodName, params);

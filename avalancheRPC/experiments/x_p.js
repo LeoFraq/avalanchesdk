@@ -44,7 +44,7 @@ const main = async () => {
                     methodName = 'avm.export';
                 }// i is uneven
                 else {
-                    params = setPimportParams(bl, userInfo, to)
+                    params = setPImportParams(bl, userInfo, to)
                     methodName = 'platform.importAVAX';
                 }
                 result = await requestProcessor(methodName, params);
