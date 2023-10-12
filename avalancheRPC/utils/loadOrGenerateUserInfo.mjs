@@ -51,53 +51,86 @@ export function updateUserInfo(newUserInfo) {
 
 
 export async function verifyUserInfoHasAccount(userInfo) {
-    if ('account' in userInfo) {
-        console.log("userInfo has account already")
-        return userInfo;
+    if ('account' in userInfo && 'platformImport' in userInfo && 'avmImport' in userInfo) {
+        console.log("userInfo has an account already");
     } else {
         console.warn('No account associated, creating one:');
-        //  random string
-        let r = (Math.random() + 1).toString(36).substring(7);
-        let accountName = "myUsername".concat(r)
-        let pwd = "SpamTankFoalUnit@12!"
-        // Create account
-        // X
-        let input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey }
-        let method = "keystore.createUser"
-        try {
-            await requestProcessor(method, input)
-            userInfo.account = { accountName, pwd }
-            updateUserInfo(userInfo)
-        } catch (error) {
-            console.error("Failed to create account")
-        }
-        // X
-        input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey }
-        method = "avm.importKey"
-        try {
-            await requestProcessor(method, input)
-        } catch (error) {
-            console.error("Failed to import account for private key:", userInfo.privKey)
-            throw error;
-        }
-        // C Returns a 405
-        // input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey }
-        // method = "avax.importKey"
-        // try {
-        //     await requestProcessor(method, input)
-        // } catch (error) {
-        //     console.error("Failed to import account for private key:", userInfo.privKey)
-        //     throw error;
-        // }
-        // P
-        input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey }
-        method = "platform.importKey"
-        try {
-            await requestProcessor(method, input)
-        } catch (error) {
-            console.error("Failed to import account for private key:", userInfo.privKey)
-            throw error;
-        }
-        return userInfo;
+        const accountName = generateRandomAccountName();
+        const pwd = "SpamTankFoalUnit@12!";
+
+        createAccount(userInfo, accountName, pwd);
+        importAvmKey(userInfo, accountName, pwd);
+        importPlatformKey(userInfo, accountName, pwd);
+
+
+    }
+    return userInfo;
+}
+
+async function importPlatformKey(userInfo, accountName, pwd) {
+    const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
+    const method = "platform.importKey";
+    try {
+        await requestProcessor(method, input);
+        userInfo.platformImport = true
+        updateUserInfo(userInfo);
+    } catch (error) {
+        console.error("Failed to import account for private key:", userInfo.privKey);
+        throw error;
     }
 }
+async function importAvmKey(userInfo, accountName, pwd) {
+    const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
+    const method = "avm.importKey";
+    try {
+        await requestProcessor(method, input);
+        userInfo.avmImport = true;
+        updateUserInfo(userInfo);
+    } catch (error) {
+        console.error("Failed to import account for private key:", userInfo.privKey);
+        throw error;
+    }
+}
+async function createAccount(userInfo, accountName, pwd) {
+    const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
+    const method = "keystore.createUser";
+    try {
+        await requestProcessor(method, input);
+        userInfo.account = { accountName, pwd };
+        updateUserInfo(userInfo);
+    } catch (error) {
+        console.error("Failed to create account");
+        throw error;
+    }
+}
+function generateRandomAccountName() {
+    const r = (Math.random() + 1).toString(36).substring(7);
+    return "myUsername".concat(r);
+}
+
+
+
+
+
+
+// curl -X POST --data '{
+//     "jsonrpc":"2.0",
+//     "id"     :1,
+//     "method" :"avm.importKey",
+//     "params" :{
+//         "username":"myUsernamevcs75j",
+//         "password":"SpamTankFoalUnit@12!",
+//         "privateKey":"PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
+//     }
+// }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+
+// curl -X POST --data '{
+//     "jsonrpc":"2.0",
+//     "id"     :1,
+//     "method" :"platform.importKey",
+//     "params" :{
+//         "username":"myUsernamevcs75j",
+//         "password":"SpamTankFoalUnit@12!",
+//         "privateKey":"PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
+//     }
+// }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P

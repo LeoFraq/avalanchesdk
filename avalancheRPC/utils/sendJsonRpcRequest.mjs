@@ -17,6 +17,8 @@ export async function sendJsonRpcRequest(method, params, endpoint) {
         params: params,
     };
 
+    console.log("SendJsonRequest, at", baseURL)
+    console.log("SendJsonRequest, params", requestData)
     try {
 
         const response = await axios.post(baseURL, requestData, {

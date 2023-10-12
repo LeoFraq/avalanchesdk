@@ -32,25 +32,25 @@ const main = async () => {
         }
         // validation
         const bl = await verifyBalance("X", userInfo["X"])
-
         if (Number(bl.result.balance) > 0) {
             console.log("Balance:", bl)
-            params = {
-                "assetID": assetID,
-                "amount": 1,
-                "to": setupKeys[i % 4].x,
-                "from": [userInfo["X"]],
-                "changeAddr": userInfo["X"],
-                "memo": "hi, mom!",
-                "username": userInfo.account.accountName,
-                "password": userInfo.account.pwd
-            }
-            console.log("Params", params)
+
+
             // issue tx
-            for (i = 0; i < iterations; i++) {
+            for (let i = 0; i < iterations; i++) {
+                params = {
+                    "assetID": assetID,
+                    "amount": 1,
+                    "to": setupKeys[i % 4].x,
+                    "from": [userInfo["X"]],
+                    "changeAddr": userInfo["X"],
+                    "memo": "hi, mom!",
+                    "username": userInfo.account.accountName,
+                    "password": userInfo.account.pwd
+                }
                 // Call the function
                 const result = await requestProcessor(methodName, params);
-                console.log(i, ": results:", result)
+                console.log(i, ": results:", result, " \n")
                 // Delay for 100ms before the next invocation
                 await new Promise(resolve => setTimeout(resolve, 100));
             }
