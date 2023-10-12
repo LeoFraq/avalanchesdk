@@ -41,7 +41,6 @@ const main = async () => {
         }
     } catch (error) {
         console.error('Error occurred:', error.message);
-        // Continue with your error handling logic, if needed
     }
 };
 
