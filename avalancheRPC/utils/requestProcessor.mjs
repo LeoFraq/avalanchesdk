@@ -77,6 +77,8 @@ function getEndpoint(methodName) {
         case 'avm.getAllBalances':
         case 'avm.getBalance':
         case 'avm.export':
+        case 'avm.getHeight':
+        case 'avm.getBlockByHeight':
             return 'ext/bc/X';
         case 'evm':
         case 'eth_getBalance':

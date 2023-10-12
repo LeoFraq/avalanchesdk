@@ -18,6 +18,7 @@ export function loadOrGenerateUserInfo() {
                 privKey: "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN",
                 X: "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
                 P: "P-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
+                CCB: "C-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
                 C: "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"
             }
             fs.writeFileSync(filePath, JSON.stringify(user_info, null, 2));

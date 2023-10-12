@@ -35,12 +35,18 @@ const main = async () => {
 
         if (Number(bl.result.balance) > 0) {
             let result;
+            /*
+            The avalanche documentation does not highlight this, but to export from the X chain, we want the cb58 address of our target, but to import, we want the EVM equivalent of the target
+            */
             let to
+            let toccb
             // issue tx
+
             for (let i = 0; i < iterations; i++) {
                 if (i % 2 == 0) {
                     to = setupKeys[i % 4].c
-                    params = setXExportParams(bl, userInfo, to)
+                    toccb = setupKeys[i % 4].ccb
+                    params = setXExportParams(bl, userInfo, toccb)
                     methodName = 'avm.export';
                 }// i is uneven
                 else {
@@ -50,7 +56,7 @@ const main = async () => {
                 console.log("Sending request ", methodName, "with params", params)
                 result = await requestProcessor(methodName, params);
                 console.log(i, ": results:", result)
-                await new Promise(resolve => setTimeout(resolve, 100));
+                await new Promise(resolve => setTimeout(resolve, 250));
 
             }
         } else {
@@ -75,9 +81,9 @@ const main = async () => {
         }
 */
 const setXExportParams = (bl, userInfo, to) => {
-    console.log("Balance:", bl)
+    // console.log("Balance:", bl)
     params = {
-        "assetID": assetID,
+        "assetID": "AVAX",
         "amount": 1,
         "to": to,
         "from": [userInfo["X"]],
@@ -88,6 +94,7 @@ const setXExportParams = (bl, userInfo, to) => {
     }
     return params
 }
+
 
 
 /*
@@ -112,6 +119,10 @@ const setCImportParams = (bl, userInfo, to) => {
 
 
 main()
+
+
+
+
 
 
 

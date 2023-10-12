@@ -17,47 +17,37 @@ let iterations = 1
 
 // Function to parse command-line arguments
 function parseCommandLineArgs() {
-    iterations = process.argv[2];
+    iterations = 1
 }
 
 
 const main = async () => {
     try {
-        let userInfo = await loadOrGenerateUserInfo();
-        userInfo = await verifyUserInfoHasAccount(userInfo);
+
         parseCommandLineArgs();
         // params = argv
         if (!methodName) {
             throw new Error('Method name not provided or not found:'.concat(methodName));
         }
         // validation
-        const bl = await verifyBalance("X", userInfo["X"])
-        if (Number(bl.result.balance) > 0) {
-            console.log("Balance:", bl)
+        params = {}
+        methodName = "avm.getHeight"
+        // Height
+        iterations = await requestProcessor(methodName, params).height;
 
-
-            // issue tx
-            for (let i = 0; i < iterations; i++) {
-                params = {
-                    "assetID": assetID,
-                    "amount": 10,
-                    "to": setupKeys[i % 4].x,
-                    "from": [userInfo["X"]],
-                    "changeAddr": userInfo["X"],
-                    "memo": "hi, mom!",
-                    "username": userInfo.account.accountName,
-                    "password": userInfo.account.pwd
-                }
+        methodName = "avm.getBlockByHeight"
+        // issue tx
+        for (let i = 0; i < iterations; i++) {
+            params = {
+                "height": String(i),
+                "encoding": "json"
+            },
                 // Call the function
-                const result = await requestProcessor(methodName, params);
-                console.log(i, ": results:", result, " \n")
-                // Delay for 100ms before the next invocation
-                await new Promise(resolve => setTimeout(resolve, 100));
-            }
-        } else {
-            console.error("Balance is wrong", bl)
+                result = await requestProcessor(methodName, params);
+            console.log(i, ": results:", result, " \n")
+            // Delay for 100ms before the next invocation
+            await new Promise(resolve => setTimeout(resolve, 100));
         }
-
     } catch (error) {
         console.error('Error occurred:', error.message);
         // Continue with your error handling logic, if needed

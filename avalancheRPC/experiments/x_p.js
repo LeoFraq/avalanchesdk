@@ -49,7 +49,7 @@ const main = async () => {
                 }
                 result = await requestProcessor(methodName, params);
                 console.log(i, ": results:", result)
-                await new Promise(resolve => setTimeout(resolve, 100));
+                await new Promise(resolve => setTimeout(resolve, 250));
 
             }
         } else {
@@ -77,7 +77,7 @@ const setXExportParams = (bl, userInfo, to) => {
     console.log("Balance:", bl)
     params = {
         "assetID": "AVAX",
-        "amount": 1,
+        "amount": 10,
         "to": to,
         "from": [userInfo["X"]],
         "changeAddr": userInfo["X"],
@@ -102,8 +102,8 @@ const setPImportParams = (bl, userInfo, to) => {
     console.log("Balance:", bl)
     params = {
         "to": to,
-        "from": [userInfo["X"]],
-        "changeAddr": userInfo["X"],
+        // "from": [userInfo["X"]],
+        // "changeAddr": userInfo["X"],
         "sourceChain": "X",
         "username": userInfo.account.accountName,
         "password": userInfo.account.pwd
