@@ -72,7 +72,8 @@ async function importPlatformKey(userInfo, accountName, pwd) {
     const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
     const method = "platform.importKey";
     try {
-        await requestProcessor(method, input);
+        const result = await requestProcessor(method, input);
+        console.log("Result from importPlatformKey", result)
         userInfo.platformImport = true
         updateUserInfo(userInfo);
     } catch (error) {
@@ -84,7 +85,9 @@ async function importAvmKey(userInfo, accountName, pwd) {
     const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
     const method = "avm.importKey";
     try {
-        await requestProcessor(method, input);
+        const result = await requestProcessor(method, input);
+        console.log("Result from importAvmKey", result)
+
         userInfo.avmImport = true;
         updateUserInfo(userInfo);
     } catch (error) {

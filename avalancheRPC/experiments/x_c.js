@@ -44,10 +44,11 @@ const main = async () => {
 
             for (let i = 0; i < iterations; i++) {
                 if (i % 2 == 0) {
-                    to = setupKeys[i % 4].c
-                    toccb = setupKeys[i % 4].ccb
+                    to = setupKeys[i % 5].c
+                    toccb = setupKeys[i % 5].ccb
                     params = setXExportParams(bl, userInfo, toccb)
                     methodName = 'avm.export';
+                    await new Promise(resolve => setTimeout(resolve, 250));
                 }// i is uneven
                 else {
                     params = setCImportParams(bl, userInfo, to)
@@ -84,7 +85,7 @@ const setXExportParams = (bl, userInfo, to) => {
     // console.log("Balance:", bl)
     params = {
         "assetID": "AVAX",
-        "amount": 1,
+        "amount": 5,
         "to": to,
         "from": [userInfo["X"]],
         "changeAddr": userInfo["X"],

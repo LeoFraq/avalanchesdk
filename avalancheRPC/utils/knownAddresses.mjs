@@ -31,4 +31,12 @@ const key4 = {
     c: "0x585319A709f417778fEBf43CdF933F298670f4E3"
 }
 
-export let setupKeys = [key1, key2, key3, key4]
+const key5 = {
+    privKey: "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN",
+    x: "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
+    p: "P-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
+    ccb: "C-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
+    c: "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"
+}
+
+export let setupKeys = [key5, key1, key2, key3, key4]
