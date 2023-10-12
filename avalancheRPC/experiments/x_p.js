@@ -85,7 +85,7 @@ const setXExportParams = (bl, userInfo, to) => {
         "username": userInfo.account.accountName,
         "password": userInfo.account.pwd
     }
-    console.log("Params", params)
+    return params
 }
 
 
@@ -108,7 +108,7 @@ const setPImportParams = (bl, userInfo, to) => {
         "username": userInfo.account.accountName,
         "password": userInfo.account.pwd
     }
-    console.log("Params", params)
+    return params
 }
 
 

@@ -31,7 +31,7 @@ const main = async () => {
             throw new Error('Method name not provided or not found:'.concat(methodName));
         }
         // validation
-        const bl = await verifyBalance("c", userInfo["C"])
+        const bl = await verifyBalance("C", userInfo["C"])
 
         if (Number(bl.result.balance) > 0) {
             console.log("Balance:", bl)

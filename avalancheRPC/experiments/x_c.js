@@ -77,7 +77,7 @@ const main = async () => {
 const setXExportParams = (bl, userInfo, to) => {
     console.log("Balance:", bl)
     params = {
-        "assetID": "AVAX",
+        "assetID": assetID,
         "amount": 1,
         "to": to,
         "from": [userInfo["X"]],
@@ -86,7 +86,7 @@ const setXExportParams = (bl, userInfo, to) => {
         "username": userInfo.account.accountName,
         "password": userInfo.account.pwd
     }
-    console.log("Params", params)
+    return params
 }
 
 
@@ -107,6 +107,7 @@ const setCImportParams = (bl, userInfo, to) => {
         "password": userInfo.account.pwd
     }
     console.log("Params", params)
+    return params
 }
 
 
