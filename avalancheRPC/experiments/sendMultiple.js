@@ -11,7 +11,7 @@ const args = process.argv.slice(2);
 const assetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 
 // Initialize default values
-let methodName = 'avm.send';
+let methodName = 'avm.sendMultiple';
 let params = {};
 let iterations = 1
 
@@ -38,16 +38,9 @@ const main = async () => {
             console.log("Balance:", bl)
             // issue tx
             for (let i = 0; i < iterations; i++) {
-                params = {
-                    "assetID": assetID,
-                    "amount": 10,
-                    "to": setupKeys[i % 4].x,
-                    "from": [userInfo["X"]],
-                    "changeAddr": userInfo["X"],
-                    "memo": "hi, mom!",
-                    "username": userInfo.account.accountName,
-                    "password": userInfo.account.pwd
-                }
+
+                params = buildParams(userInfo)
+
                 // Call the function
                 const result = await requestProcessor(methodName, params);
                 console.log(i, ": results:", result, " \n")
@@ -81,4 +74,35 @@ function calculateWaitTime(result) {
         console.error("How did you get here?")
     }
     return waitTime;
+}
+
+
+function buildParams(userInfo) {
+    let outputs = []
+    let currentSetupKeys = setupKeys
+    try {
+        const walletsJson = fs.readFileSync('wallets.json', 'utf8');
+        setupKeys = JSON.parse(walletsJson);
+    } catch (error) {
+        console.error('Error reading "wallets.json":', error.message);
+        process.exit(1);
+    }
+    currentSetupKeys.forEach(element => {
+        outputs.push(
+            {
+                "assetID": assetID,
+                "amount": 10,
+                "to": element.x
+            }
+        )
+    });
+    let params = {
+        "outputs": outputs,
+        "from": [userInfo["X"]],
+        "changeAddr": userInfo["X"],
+        "memo": "hi, mom!",
+        "username": userInfo.account.accountName,
+        "password": userInfo.account.pwd
+    }
+    return params
 }
