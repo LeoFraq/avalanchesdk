@@ -34,8 +34,8 @@ const main = async () => {
         for (let index = 0; index < iterations; index++) {
             user = generateRandomAccountName()
             pwd = generateRandomPassword()
-            chainData = createAccount(chainData, user, pwd)
-            chainData = createAddress(chainData)
+            chainData = await createAccount(chainData, user, pwd)
+            chainData = await createAddress(chainData)
             // Push the generated account into the array
             generatedAccounts.push(chainData);
             await new Promise(resolve => setTimeout(resolve, 250));
@@ -52,7 +52,9 @@ const main = async () => {
 async function createAddress(userInfo) {
     const input = { "username": userInfo.account.accountName, "password": userInfo.account.pwd }
     const method = "platform.createAddress";
-    let platformData = await requestProcessor(method, input).address;
+    let platformData = await requestProcessor(method, input)
+    console.log("platformData", platformData)
+    platformData = platformData.result.address
     userInfo = { ...userInfo, x: replacePrefixWithLetter(platformData, "X"), c: replacePrefixWithLetter(platformData, "C"), p: platformData }
     return userInfo
 }
@@ -70,11 +72,11 @@ async function createAccount(userInfo, accountName, pwd) {
     }
 }
 function generateRandomAccountName() {
-    const r = (Math.random() + 1).toString(36).substring(7);
+    const r = (Math.random() + 1).toString(36).substring(9);
     return "myUsername".concat(r);
 }
 function generateRandomPassword() {
-    const r = (Math.random() + 1).toString(36).substring(7);
+    const r = (Math.random() + 1).toString(36).substring(9);
     return "SpamTankFoalUnit@12!".concat(r);
 }
 
@@ -82,8 +84,10 @@ function replacePrefixWithLetter(inputString, letter) {
     // Check if the inputString starts with "P-"
     if (inputString.startsWith("P-")) {
         // Replace "P-" with the specified letter
-        return letter + inputString.slice(2);
+        return letter + inputString.slice(1);
     }
     // If the inputString doesn't start with "P-", return it as is
     return inputString;
 }
+
+main()

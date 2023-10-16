@@ -80,12 +80,14 @@ function calculateWaitTime(result) {
 function buildParams(userInfo) {
     let outputs = []
     let currentSetupKeys = setupKeys
-    try {
-        const walletsJson = fs.readFileSync('wallets.json', 'utf8');
-        setupKeys = JSON.parse(walletsJson);
-    } catch (error) {
-        console.error('Error reading "wallets.json":', error.message);
-        process.exit(1);
+    if (fs.existsSync("accounts.json")) {
+        try {
+            const walletsJson = fs.readFileSync('accounts.json', 'utf8');
+            currentSetupKeys = JSON.parse(walletsJson);
+        } catch (error) {
+            console.error('Error reading "accounts.json":', error.message);
+            process.exit(1);
+        }
     }
     currentSetupKeys.forEach(element => {
         outputs.push(
