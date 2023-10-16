@@ -62,6 +62,7 @@ export async function verifyUserInfoHasAccount(userInfo) {
         createAccount(userInfo, accountName, pwd);
         importAvmKey(userInfo, accountName, pwd);
         importPlatformKey(userInfo, accountName, pwd);
+        importAvaxKey(userInfo, accountName, pwd);
 
 
     }
@@ -95,6 +96,21 @@ async function importAvmKey(userInfo, accountName, pwd) {
         throw error;
     }
 }
+async function importAvaxKey(userInfo, accountName, pwd) {
+    const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
+    const method = "avax.importKey";
+    try {
+        const result = await requestProcessor(method, input);
+        console.log("Result from importAvaxKey", result)
+
+        userInfo.avaxImport = true;
+        updateUserInfo(userInfo);
+    } catch (error) {
+        console.error("Failed to import account for private key:", userInfo.privKey);
+        throw error;
+    }
+}
+
 async function createAccount(userInfo, accountName, pwd) {
     const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
     const method = "keystore.createUser";
@@ -117,24 +133,17 @@ function generateRandomAccountName() {
 
 
 
-// curl -X POST --data '{
-//     "jsonrpc":"2.0",
-//     "id"     :1,
-//     "method" :"avm.importKey",
-//     "params" :{
-//         "username":"myUsernamevcs75j",
-//         "password":"SpamTankFoalUnit@12!",
-//         "privateKey":"PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
-//     }
-// }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 
-// curl -X POST --data '{
-//     "jsonrpc":"2.0",
-//     "id"     :1,
-//     "method" :"platform.importKey",
-//     "params" :{
-//         "username":"myUsernamevcs75j",
-//         "password":"SpamTankFoalUnit@12!",
-//         "privateKey":"PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
-//     }
-// }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P
+/**
+ curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"avax.importKey",
+    "params" :{
+        "username" :"myUsernamet5nsx",
+        "password":"SpamTankFoalUnit@12!",
+        "privateKey":"PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+  
+ */

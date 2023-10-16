@@ -70,18 +70,43 @@ const main = async () => {
 // Request
 curl -X POST --data '{"id": 1,"jsonrpc": "2.0","method": "eth_signTransaction","params":
  [
-    {"data":"0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
-    "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+    {
+    "from": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
     "gas": "0x76c0",
     "gasPrice":     "0x9184e72a000",
-    "to": "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-    "value": "0x9184e72a"}]}'
+    "to": "0x93442D566Bb672D185c1904a39554Bfec47F7718",
+    "value": "0x1",
+    "nonce": "0x0"
+    "data": "0xa9059cbb0000000000000000000000000x93442D566Bb672D185c1904a39554Bfec47F77180000000000000000000000000000000000000000000000000000000000000001"
+}]}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+
+
+curl -X POST --data '{"id": 1,"jsonrpc": "2.0","method": "eth_sendTransaction","params":
+ [
+    {
+    "from": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
+    "gas": "0x76c0",
+    "gasPrice":     "0x9184e72a000",
+    "to": "0x93442D566Bb672D185c1904a39554Bfec47F7718",
+    "value": "0x1",
+    "nonce": "0x0",
+    "data": "0xa9059cbb0000000000000000000000000x93442D566Bb672D185c1904a39554Bfec47F77180000000000000000000000000000000000000000000000000000000000000001"
+}]}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
+
+
+
+
 // Result
-{
-    "id": 1,
-    "jsonrpc": "2.0",
-    "result": "0xa3f20717a250c2b0b729b7e5becbff67fdaef7e0699da4de7ca5895b02a170a12d887fd3b17bfdce3481f10bea41f45ba9f709d39ce8325427b57afcfc994cee1b"
-}
+  params: [
+    {
+      to: '0x93442D566Bb672D185c1904a39554Bfec47F7718',
+      from: '0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC',
+      value: 1,
+      username: 'myUsernamet5nsx',
+      password: 'SpamTankFoalUnit@12!'
+    }
+  ]
+ 
 
 */
 const createTransaction = (userInfo) => {

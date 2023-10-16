@@ -42,6 +42,8 @@ const main = async () => {
                     to = setupKeys[i % 5].p
                     params = setXExportParams(bl, userInfo, to)
                     methodName = 'avm.export';
+                    await new Promise(resolve => setTimeout(resolve, 250));
+
                 }// i is uneven
                 else {
                     params = setPImportParams(bl, userInfo, to)

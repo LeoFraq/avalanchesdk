@@ -36,13 +36,13 @@ const main = async () => {
         if (Number(bl.result.balance) > 0) {
             let result;
             /*
-            The avalanche documentation does not highlight this, but to export from the X chain, we want the cb58 address of our target, but to import, we want the EVM equivalent of the target
+            The avalanche documentation does not highlight this, but to export from the X chain, we want the cb58 address of our target,
+            but to import, we want the EVM equivalent of the target
             */
             let to
             let toccb
             // issue tx
-
-            for (let i = 0; i < iterations; i++) {
+            for (let i = 0; i < iterations * 2; i++) {
                 if (i % 2 == 0) {
                     to = setupKeys[i % 5].c
                     toccb = setupKeys[i % 5].ccb
@@ -107,7 +107,7 @@ const setXExportParams = (bl, userInfo, to) => {
     }
 */
 const setCImportParams = (bl, userInfo, to) => {
-    console.log("Balance:", bl)
+    // console.log("Balance:", bl)
     params = {
         "to": to,
         "sourceChain": "X",
@@ -120,12 +120,5 @@ const setCImportParams = (bl, userInfo, to) => {
 
 
 main()
-
-
-
-
-
-
-
 
 

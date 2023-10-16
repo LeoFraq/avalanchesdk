@@ -31,11 +31,10 @@ const main = async () => {
             throw new Error('Method name not provided or not found:'.concat(methodName));
         }
         // validation
+        // verify send multiple
         const bl = await verifyBalance("X", userInfo["X"])
         if (Number(bl.result.balance) > 0) {
             console.log("Balance:", bl)
-
-
             // issue tx
             for (let i = 0; i < iterations; i++) {
                 params = {
@@ -52,7 +51,7 @@ const main = async () => {
                 const result = await requestProcessor(methodName, params);
                 console.log(i, ": results:", result, " \n")
                 // Delay for 100ms before the next invocation
-                await new Promise(resolve => setTimeout(resolve, 100));
+                await new Promise(resolve => setTimeout(resolve, 250));
             }
         } else {
             console.error("Balance is wrong", bl)
@@ -66,7 +65,5 @@ const main = async () => {
 
 
 main()
-
-
 
 

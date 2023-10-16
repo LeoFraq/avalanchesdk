@@ -40,7 +40,7 @@ export async function requestProcessor(methodName, params) {
         };
         // Write the data to the log file in CSV format
         writeToCSVFile(`logs/${methodName}.csv`, data);
-        console.log('Success:', result);
+        // console.log('Success:', result);
         return result;
         // Continue with your logic here using the 'result'
     } catch (error) {
@@ -81,13 +81,14 @@ function getEndpoint(methodName) {
         case 'avm.getBlockByHeight':
             return 'ext/bc/X';
         case 'evm':
-        case 'eth_getBalance':
         case 'eth_sendTransactions':
         case 'avax':
             return 'ext/bc/C'
         case 'eth_getAssetBalance':
         case 'eth_sendTransaction':
         case 'eth_signTransaction':
+        case 'eth_getBalance':
+        case 'avax.importKey':
             return 'ext/bc/C/rpc'
         case 'avax.importKey':
         case 'avax.import':

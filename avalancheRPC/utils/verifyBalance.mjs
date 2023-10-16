@@ -38,13 +38,24 @@ async function verifyP(addr) {
     const result = await requestProcessor(method, params);
     return result
 }
+// AVAX balance is retrieved with getBalance, all others with getAssetBalance
 async function verifyC(addr) {
-    const method = "eth_getAssetBalance"
+    const method = "eth_getBalance"
     const params =
-        [addr, "latest", assetID]
+        [addr, "latest"]
     const result = await requestProcessor(method, params);
     // const hexBalance = "0xYourHexBalanceHere"; // Replace with the hex balance from the JSON-RPC response
     // const decimalBalance = parseInt(hexBalance, 16); // Convert hex to decimal
 
     return result
 }
+
+/*
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"eth_getBalance",
+    "params" : ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC","latest"]
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
+
+*/
