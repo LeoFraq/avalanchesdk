@@ -1,5 +1,6 @@
 import fs from "fs"
-import { requestProcessor } from "./requestProcessor.mjs";
+import { requestProcessor } from '../utils/requestProcessor.mjs';
+
 
 let iterations
 
@@ -41,7 +42,7 @@ const main = async () => {
 
         }
         // Save the generated accounts to a JSON file
-        aveAccountsToJson(generatedAccounts);
+        saveAccountsToJson(generatedAccounts);
 
     }
     catch (error) { console.error(error) }

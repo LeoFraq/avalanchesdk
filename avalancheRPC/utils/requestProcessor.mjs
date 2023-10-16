@@ -69,6 +69,7 @@ function getEndpoint(methodName) {
         case 'platform.getBalance':
         case 'platform.importKey':
         case 'platform.importAVAX':
+        case 'platform.createAddress':
             return 'ext/bc/P';
         case 'avm.send':
         case 'avm.getTx':
