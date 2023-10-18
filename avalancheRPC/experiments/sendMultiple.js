@@ -4,7 +4,7 @@ import { loadOrGenerateUserInfo, verifyUserInfoHasAccount } from '../utils/loadO
 
 import { setupKeys } from '../utils/knownAddresses.mjs';
 import { verifyBalance } from '../utils/verifyBalance.mjs';
-
+import fs from "fs"
 
 // Parse command-line arguments to extract the methodName and additional parameters
 const args = process.argv.slice(2);
@@ -44,7 +44,7 @@ const main = async () => {
                 // Call the function
                 const result = await requestProcessor(methodName, params);
                 console.log(i, ": results:", result, " \n")
-                waitTime = calculateWaitTime(result)
+                waitTime = calculateWaitTime(result, waitTime)
                 // Delay for 100ms before the next invocation
                 await new Promise(resolve => setTimeout(resolve, waitTime));
             }
@@ -63,7 +63,7 @@ main()
 
 
 
-function calculateWaitTime(result) {
+function calculateWaitTime(result, waitTime) {
     if (result.result && result.result.txID) {
         waitTime -= 50;
     } else if (result.error) {
@@ -108,3 +108,5 @@ function buildParams(userInfo) {
     }
     return params
 }
+
+

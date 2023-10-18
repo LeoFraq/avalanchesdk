@@ -72,6 +72,7 @@ function getEndpoint(methodName) {
         case 'platform.createAddress':
             return 'ext/bc/P';
         case 'avm.send':
+        case 'avm.sendMultiple':
         case 'avm.getTx':
         case 'avm.issueTx':
         case 'avm.importKey':
