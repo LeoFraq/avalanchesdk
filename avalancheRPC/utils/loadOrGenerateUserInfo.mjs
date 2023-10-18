@@ -75,8 +75,10 @@ async function importPlatformKey(userInfo, accountName, pwd) {
     try {
         const result = await requestProcessor(method, input);
         console.log("Result from importPlatformKey", result)
-        userInfo.platformImport = true
-        updateUserInfo(userInfo);
+        if (result.result) {
+            userInfo.platformImport = true
+            updateUserInfo(userInfo);
+        }
     } catch (error) {
         console.error("Failed to import account for private key:", userInfo.privKey);
         throw error;
@@ -88,9 +90,10 @@ async function importAvmKey(userInfo, accountName, pwd) {
     try {
         const result = await requestProcessor(method, input);
         console.log("Result from importAvmKey", result)
-
-        userInfo.avmImport = true;
-        updateUserInfo(userInfo);
+        if (result.result) {
+            userInfo.avmImport = true;
+            updateUserInfo(userInfo);
+        }
     } catch (error) {
         console.error("Failed to import account for private key:", userInfo.privKey);
         throw error;
@@ -102,9 +105,10 @@ async function importAvaxKey(userInfo, accountName, pwd) {
     try {
         const result = await requestProcessor(method, input);
         console.log("Result from importAvaxKey", result)
-
-        userInfo.avaxImport = true;
-        updateUserInfo(userInfo);
+        if (result.result) {
+            userInfo.avaxImport = true;
+            updateUserInfo(userInfo);
+        }
     } catch (error) {
         console.error("Failed to import account for private key:", userInfo.privKey);
         throw error;
