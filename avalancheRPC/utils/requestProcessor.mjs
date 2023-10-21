@@ -71,6 +71,8 @@ function getEndpoint(methodName) {
         case 'platform.importAVAX':
         case 'platform.createAddress':
         case 'platform.addValidator':
+        case 'platform.getHeight':
+        case 'platform.getBlockByHeight':
             return 'ext/bc/P';
         case 'avm.send':
         case 'avm.sendMultiple':

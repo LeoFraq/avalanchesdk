@@ -60,4 +60,53 @@ main()
 
 
 
+async function processXHeight() {
+    // validation
+    params = {}
+    methodName = "avm.getHeight"
+    // Height
+    iterations = await requestProcessor(methodName, params);
+
+    methodName = "avm.getBlockByHeight"
+    let result
+    // issue tx
+    for (let i = 0; i < iterations.result.height; i++) {
+        params = {
+            "height": String(i),
+            "encoding": "json"
+        },
+            // Call the function
+            result = await requestProcessor(methodName, params);
+        console.log(i, ": results:", result, " \n")
+        // Delay for 100ms before the next invocation
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
+}
+
+
+async function processPHeight() {
+    // validation
+    params = {}
+    methodName = "platform.getHeight"
+    // Height
+    iterations = await requestProcessor(methodName, params);
+
+    methodName = "platform.getBlockByHeight"
+    let result
+    // issue tx
+    for (let i = 0; i < iterations.result.height; i++) {
+        params = {
+            "height": String(i),
+            "encoding": "json"
+        },
+            // Call the function
+            result = await requestProcessor(methodName, params);
+        console.log(i, ": results:", result, " \n")
+        // Delay for 100ms before the next invocation
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
+}
+
+
+
 
