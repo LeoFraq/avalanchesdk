@@ -35,7 +35,7 @@ const main = async () => {
     try {
         let userInfo = await loadOrGenerateUserInfo();
         userInfo = await verifyUserInfoHasAccount(userInfo);
-        nodeID = getNodeId();
+        nodeID = await getNodeId();
         const now = new Date();
         const startDate = new Date(now.getTime() + 1 * 60 * 1000); // 1 minutes in milliseconds
         const endDate = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000); // 2 days in milliseconds

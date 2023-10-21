@@ -33,11 +33,12 @@ const main = async () => {
         params = {}
         methodName = "avm.getHeight"
         // Height
-        iterations = await requestProcessor(methodName, params).height;
+        iterations = await requestProcessor(methodName, params);
 
         methodName = "avm.getBlockByHeight"
+        let result
         // issue tx
-        for (let i = 0; i < iterations; i++) {
+        for (let i = 0; i < iterations.result.height; i++) {
             params = {
                 "height": String(i),
                 "encoding": "json"
