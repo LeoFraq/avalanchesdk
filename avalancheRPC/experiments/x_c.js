@@ -81,11 +81,12 @@ const main = async () => {
             "password":"myPassword"
         }
 */
+// 1,000,000,000 GWEI = 1AVAX
 const setXExportParams = (bl, userInfo, to) => {
     // console.log("Balance:", bl)
     params = {
         "assetID": "AVAX",
-        "amount": 5,
+        "amount": 1000000000,
         "to": to,
         "from": [userInfo["X"]],
         "changeAddr": userInfo["X"],
