@@ -51,6 +51,8 @@ const main = async () => {
                 // Call the function
                 const result = await requestProcessor(methodName, params);
                 console.log(i, ": results:", result, " \n")
+                // The required delay varies as the load increases, this tries to "harmonize" the errors
+                // It is an imperfect solution, if we want to achieve anything else we should probably use sendMultiple
                 waitTime = calculateWaitTime(result, waitTime)
                 // Delay for 100ms before the next invocation
                 await new Promise(resolve => setTimeout(resolve, waitTime));
@@ -69,13 +71,15 @@ const main = async () => {
 main()
 
 
-
+let consecutiveSuccess = 0
 function calculateWaitTime(result, waitTime) {
     if (result.result && result.result.txID) {
-        waitTime -= 50;
+        consecutiveSuccess++
+        if (consecutiveSuccess % 3 == 0) { waitTime -= 50; }
     } else if (result.error) {
         // JSON-RPC response is in "increase" format
         waitTime += 100; // Increase wait time by 100ms
+        consecutiveSuccess = 0
     } else {
         // A straight up error
         console.error("How did you get here?")

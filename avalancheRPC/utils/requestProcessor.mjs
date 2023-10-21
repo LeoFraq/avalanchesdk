@@ -70,6 +70,7 @@ function getEndpoint(methodName) {
         case 'platform.importKey':
         case 'platform.importAVAX':
         case 'platform.createAddress':
+        case 'platform.addValidator':
             return 'ext/bc/P';
         case 'avm.send':
         case 'avm.sendMultiple':
@@ -90,7 +91,7 @@ function getEndpoint(methodName) {
         case 'eth_sendTransaction':
         case 'eth_signTransaction':
         case 'eth_getBalance':
-        case 'avax.importKey':
+            // case 'avax.importKey':
             return 'ext/bc/C/rpc'
         case 'avax.importKey':
         case 'avax.import':
@@ -98,6 +99,7 @@ function getEndpoint(methodName) {
         case 'health.health':
             return 'ext/health'
         case 'info':
+        case 'info.getNodeID':
             return 'ext/info'
         case 'keystore.createUser':
             return 'ext/keystore'

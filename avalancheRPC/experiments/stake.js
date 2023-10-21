@@ -15,10 +15,7 @@ let methodName = 'platform.addValidator';
 let params = {};
 let nodeID = ""
 
-// Function to parse command-line arguments
-function parseCommandLineArgs() {
-    nodeID = process.argv[2];
-}
+
 
 /**
  * {
@@ -38,7 +35,13 @@ const main = async () => {
     try {
         let userInfo = await loadOrGenerateUserInfo();
         userInfo = await verifyUserInfoHasAccount(userInfo);
-        parseCommandLineArgs();
+        nodeID = getNodeId();
+        const now = new Date();
+        const startDate = new Date(now.getTime() + 1 * 60 * 1000); // 1 minutes in milliseconds
+        const endDate = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000); // 2 days in milliseconds
+
+        const timestampStart = Math.floor(startDate.getTime() / 1000);
+        const timestampEnd = Math.floor(endDate.getTime() / 1000);
         // issue tx
         params = {
             "nodeID": nodeID,
@@ -47,8 +50,8 @@ const main = async () => {
             "changeAddr": userInfo["P"],
             "memo": "hi, mom!",
             "stakeAmount": 1000000,
-            "startTime": '$(date --date="10 minutes" +%s)',
-            "endTime": '$(date --date="2 days" +%s)',
+            "startTime": timestampStart,
+            "endTime": timestampEnd,
             "rewardAddress": userInfo["P"],
             "username": userInfo.account.accountName,
             "password": userInfo.account.pwd
@@ -65,4 +68,17 @@ const main = async () => {
 
 main()
 
-
+/**
+ * curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.getNodeID"
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+ */
+async function getNodeId() {
+    let methodName = "info.getNodeID"
+    let params = {}
+    const result = await requestProcessor(methodName, params);
+    console.log("Result of getNodeID", result)
+    return result.nodeID
+}

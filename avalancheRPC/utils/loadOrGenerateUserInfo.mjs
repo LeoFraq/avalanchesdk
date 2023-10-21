@@ -56,7 +56,7 @@ export async function verifyUserInfoHasAccount(userInfo) {
         console.log("userInfo has an account already");
     } else {
         console.warn('No account associated, creating one:');
-        const accountName = generateRandomAccountName();
+        const accountName = "myUsernamesr9mm"
         const pwd = "SpamTankFoalUnit@12!";
 
         createAccount(userInfo, accountName, pwd);
@@ -127,27 +127,3 @@ async function createAccount(userInfo, accountName, pwd) {
         throw error;
     }
 }
-function generateRandomAccountName() {
-    const r = (Math.random() + 1).toString(36).substring(7);
-    return "myUsername".concat(r);
-}
-
-
-
-
-
-
-
-/**
- curl -X POST --data '{
-    "jsonrpc":"2.0",
-    "id"     :1,
-    "method" :"avax.importKey",
-    "params" :{
-        "username" :"myUsernamet5nsx",
-        "password":"SpamTankFoalUnit@12!",
-        "privateKey":"PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
-    }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-  
- */
