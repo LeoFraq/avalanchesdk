@@ -81,7 +81,6 @@ async function importPlatformKey(userInfo, accountName, pwd) {
         }
     } catch (error) {
         console.error("Failed to import account for private key:", userInfo.privKey);
-        throw error;
     }
 }
 async function importAvmKey(userInfo, accountName, pwd) {
@@ -96,7 +95,7 @@ async function importAvmKey(userInfo, accountName, pwd) {
         }
     } catch (error) {
         console.error("Failed to import account for private key:", userInfo.privKey);
-        throw error;
+
     }
 }
 async function importAvaxKey(userInfo, accountName, pwd) {
@@ -111,7 +110,7 @@ async function importAvaxKey(userInfo, accountName, pwd) {
         }
     } catch (error) {
         console.error("Failed to import account for private key:", userInfo.privKey);
-        throw error;
+
     }
 }
 
@@ -124,6 +123,6 @@ async function createAccount(userInfo, accountName, pwd) {
         updateUserInfo(userInfo);
     } catch (error) {
         console.error("Failed to create account");
-        throw error;
+
     }
 }
