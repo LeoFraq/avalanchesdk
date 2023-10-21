@@ -17,7 +17,7 @@ function writeToCSVFile(fileName, data) {
         fs.mkdirSync(directory, { recursive: true });
     }
     // Format the data as a CSV string
-    const csvContent = Object.values(data).join(',') + '\n';
+    const csvContent = Object.values(data).join('|') + '\n';
     // Append the CSV content to the file
     fs.appendFileSync(fileName, csvContent);
 }
