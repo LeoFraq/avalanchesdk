@@ -38,6 +38,7 @@ const main = async () => {
         parseCommandLineArgs()
         let user;
         let pwd;
+        let pkey;
         let chainData = {}
         const generatedAccounts = []; // Collect generated accounts
         for (let index = 0; index < iterations; index++) {
@@ -45,6 +46,7 @@ const main = async () => {
             pwd = generateRandomPassword()
             chainData = await createAccount(chainData, user, pwd)
             chainData = await createAddress(chainData)
+            pkey = await extractPkey(chainData, user, pwd, chainData.p)
             // Push the generated account into the array
             generatedAccounts.push(chainData);
             await new Promise(resolve => setTimeout(resolve, 250));
@@ -59,6 +61,16 @@ const main = async () => {
     catch (error) { console.error(error) }
 }
 
+
+async function extractPkey(userInfo, accountName, pwd, paddr) {
+    const input = { "username": accountName, "password": pwd, "address": paddr }
+    const method = "platform.exportKey";
+    let platformData = await requestProcessor(method, input)
+    console.log("platformData", platformData)
+    platformData = platformData.result.privateKey
+    userInfo = { ...userInfo, privKey: platformData }
+    return userInfo
+}
 
 async function createAddress(userInfo) {
     const input = { "username": userInfo.account.accountName, "password": userInfo.account.pwd }
