@@ -4,13 +4,13 @@ import { requestProcessor } from './requestProcessor.mjs';
 export async function verifyBalance(type, addr) {
 
     switch (type) {
-        case "X":
+        case "x":
             return await verifyX(addr)
             break;
-        case "C":
+        case "c":
             return verifyC(addr)
             break;
-        case "P":
+        case "p":
             return verifyP(addr)
             break;
         default:

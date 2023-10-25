@@ -46,13 +46,13 @@ const main = async () => {
         params = {
             "nodeID": nodeID,
             "amount": 10,
-            "from": [userInfo["P"]],
-            "changeAddr": userInfo["P"],
+            "from": [userInfo["p"]],
+            "changeAddr": userInfo["p"],
             "memo": "hi, mom!",
             "stakeAmount": 1000000,
             "startTime": timestampStart,
             "endTime": timestampEnd,
-            "rewardAddress": userInfo["P"],
+            "rewardAddress": userInfo["p"],
             "username": userInfo.account.accountName,
             "password": userInfo.account.pwd
         }

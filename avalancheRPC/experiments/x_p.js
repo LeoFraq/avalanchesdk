@@ -31,7 +31,7 @@ const main = async () => {
             throw new Error('Method name not provided or not found:'.concat(methodName));
         }
         // validation
-        const bl = await verifyBalance("X", userInfo["X"])
+        const bl = await verifyBalance("x", userInfo["x"])
 
         if (Number(bl.result.balance) > 0) {
             let result;
@@ -81,8 +81,8 @@ const setXExportParams = (bl, userInfo, to) => {
         "assetID": "AVAX",
         "amount": 10,
         "to": to,
-        "from": [userInfo["X"]],
-        "changeAddr": userInfo["X"],
+        "from": [userInfo["x"]],
+        "changeAddr": userInfo["x"],
         "memo": "hi, mom!",
         "username": userInfo.account.accountName,
         "password": userInfo.account.pwd

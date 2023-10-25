@@ -106,8 +106,6 @@ curl -X POST --data '{"id": 1,"jsonrpc": "2.0","method": "eth_sendTransaction","
       password: 'SpamTankFoalUnit@12!'
     }
   ]
- 
-
 */
 const createTransaction = (userInfo) => {
     let params = {

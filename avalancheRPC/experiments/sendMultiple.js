@@ -32,7 +32,7 @@ const main = async () => {
         }
         // validation
         // verify send multiple
-        const bl = await verifyBalance("X", userInfo["X"])
+        const bl = await verifyBalance("x", userInfo["x"])
         if (Number(bl.result.balance) > 0) {
             let waitTime = 250
             console.log("Balance:", bl)
@@ -100,8 +100,8 @@ function buildParams(userInfo) {
     });
     let params = {
         "outputs": outputs,
-        "from": [userInfo["X"]],
-        "changeAddr": userInfo["X"],
+        "from": [userInfo["x"]],
+        "changeAddr": userInfo["x"],
         "memo": "hi, mom!",
         "username": userInfo.account.accountName,
         "password": userInfo.account.pwd
