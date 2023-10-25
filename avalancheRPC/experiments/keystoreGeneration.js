@@ -165,16 +165,5 @@ function replacePrefixWithLetter(inputString, letter) {
 main()
 
 
-curl - X POST--data '{
-"jsonrpc": "2.0",
-    "id"     : 1,
-        "method" : "avm.getBalance",
-            "params" : {
-    "address": "X-local1amjp8lz46g7gaeylq47kxe6cjpy9kc4dz8f2x4",
-        "assetID": "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
-}
-  }' -H 'content - type: application / json; ' 127.0.0.1:9650/ext/bc/X
-
-
 
 
