@@ -73,6 +73,7 @@ function getEndpoint(methodName) {
         case 'platform.addValidator':
         case 'platform.getHeight':
         case 'platform.getBlockByHeight':
+        case 'platform.exportKey':
             return 'ext/bc/P';
         case 'avm.send':
         case 'avm.sendMultiple':
