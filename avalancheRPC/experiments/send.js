@@ -51,7 +51,7 @@ const main = async () => {
         if (Number(bl.result.balance) > 0) {
             let waitTime = 250
             console.log("Balance:", bl)
-            let currentAddr = userInfo.x
+            let currentAddr = userInfo
             // issue tx
             for (let i = 0; i < iterations; i++) {
                 params = {
@@ -65,7 +65,7 @@ const main = async () => {
                     "password": currentAddr.account.pwd
                 }
                 console.log("Logging parameters:", params)
-                currentAddr = currentSetupKeys[i % currentSetupKeys.length]["x"]
+                currentAddr = currentSetupKeys[i % currentSetupKeys.length]
                 // Call the function
                 const result = await requestProcessor(methodName, params);
                 console.log(i, ": results:", result, " \n")

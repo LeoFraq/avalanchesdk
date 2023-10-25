@@ -3,6 +3,7 @@ import { requestProcessor } from '../utils/requestProcessor.mjs';
 
 
 let iterations
+let validateExistingConfig = false
 
 function parseCommandLineArgs() {
     iterations = process.argv[2];
@@ -19,6 +20,14 @@ function saveAccountsToJson(accounts) {
 
     // Merge existing and new accounts and write them back to the file
     const updatedAccounts = [...existingAccounts, ...accounts];
+    // Imports each account to keystore
+    updatedAccounts.forEach(element => {
+        if (!element.avmImport) { element = importAvmKey(element, element.account.accountName, element.account.pwd) }
+        if (!element.platformImport) { element = importAvmKey(element, element.account.accountName, element.account.pwd) }
+        if (!element.avaxImport) { element = importAvmKey(element, element.account.accountName, element.account.pwd) }
+    });
+
+
     fs.writeFileSync("accounts.json", JSON.stringify(updatedAccounts, null, 2), "utf8");
 }
 
@@ -39,7 +48,9 @@ const main = async () => {
             // Push the generated account into the array
             generatedAccounts.push(chainData);
             await new Promise(resolve => setTimeout(resolve, 250));
-
+            chainData = await importAvaxKey(chainData, user, pwd)
+            chainData = await importAvmKey(chainData, user, pwd)
+            chainData = await importPlatformKey(chainData, user, pwd)
         }
         // Save the generated accounts to a JSON file
         saveAccountsToJson(generatedAccounts);
@@ -71,6 +82,53 @@ async function createAccount(userInfo, accountName, pwd) {
         throw error;
     }
 }
+
+async function importAvmKey(userInfo, accountName, pwd) {
+    const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
+    const method = "avm.importKey";
+    try {
+        const result = await requestProcessor(method, input);
+        console.log("Result from importAvmKey", result)
+        if (result.result) {
+            userInfo.avmImport = true;
+        }
+        return userInfo
+    } catch (error) {
+        console.error("Failed to import account for private key:", userInfo.privKey);
+
+    }
+}
+async function importAvaxKey(userInfo, accountName, pwd) {
+    const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
+    const method = "avax.importKey";
+    try {
+        const result = await requestProcessor(method, input);
+        console.log("Result from importAvaxKey", result)
+        if (result.result) {
+            userInfo.avaxImport = true;
+        }
+        return userInfo
+    } catch (error) {
+        console.error("Failed to import account for private key:", userInfo.privKey);
+
+    }
+}
+async function importPlatformKey(userInfo, accountName, pwd) {
+    const input = { "username": accountName, "password": pwd, "privateKey": userInfo.privKey };
+    const method = "platform.importKey";
+    try {
+        const result = await requestProcessor(method, input);
+        console.log("Result from importPlatformKey", result)
+        if (result.result) {
+            userInfo.platformImport = true
+        }
+        return userInfo
+    } catch (error) {
+        console.error("Failed to import account for private key:", userInfo.privKey);
+    }
+}
+
+
 function generateRandomAccountName() {
     const r = (Math.random() + 1).toString(36).substring(9);
     return "myUsername".concat(r);
