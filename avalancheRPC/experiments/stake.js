@@ -50,6 +50,7 @@ const main = async () => {
             "changeAddr": userInfo["p"],
             "memo": "hi, mom!",
             "stakeAmount": 2000000000000000,
+            "delegationFeeRate": 10,
             "startTime": timestampStart,
             "endTime": timestampEnd,
             "rewardAddress": userInfo["p"],
