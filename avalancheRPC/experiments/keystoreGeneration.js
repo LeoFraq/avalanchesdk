@@ -46,7 +46,7 @@ const main = async () => {
             pwd = generateRandomPassword()
             chainData = await createAccount(chainData, user, pwd)
             chainData = await createAddress(chainData)
-            pkey = await extractPkey(chainData, user, pwd, chainData.p)
+            chainData = await extractPkey(chainData, user, pwd, chainData.p)
             // Push the generated account into the array
             generatedAccounts.push(chainData);
             await new Promise(resolve => setTimeout(resolve, 250));
@@ -161,3 +161,8 @@ function replacePrefixWithLetter(inputString, letter) {
 }
 
 main()
+
+
+
+
+
