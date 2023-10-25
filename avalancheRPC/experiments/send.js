@@ -102,5 +102,10 @@ function calculateWaitTime(result, waitTime) {
         // A straight up error
         console.error("How did you get here?")
     }
+    // Minimum delay
+    if (waitTime <= 10) waitTime = 10
     return waitTime;
 }
+
+
+

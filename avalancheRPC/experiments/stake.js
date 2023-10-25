@@ -49,7 +49,7 @@ const main = async () => {
             "from": [userInfo["p"]],
             "changeAddr": userInfo["p"],
             "memo": "hi, mom!",
-            "stakeAmount": 1000000,
+            "stakeAmount": 2000000000000000,
             "startTime": timestampStart,
             "endTime": timestampEnd,
             "rewardAddress": userInfo["p"],
@@ -82,3 +82,14 @@ async function getNodeId() {
     console.log("Result of getNodeID", result)
     return result.nodeID
 }
+
+
+
+// curl -X POST --data '{
+//     "jsonrpc": "2.0",
+//     "method": "platform.getCurrentValidators",
+//     "params": {
+//       "nodeIDs": []
+//     },
+//     "id": 1
+// }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/P

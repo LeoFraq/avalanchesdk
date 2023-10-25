@@ -31,7 +31,7 @@ function saveAccountsToJson(accounts) {
     fs.writeFileSync("accounts.json", JSON.stringify(updatedAccounts, null, 2), "utf8");
 }
 
-
+// Occasional issue, can be fixed as we scale, the random string CAN  occur twice, and thus fails to create an account
 const main = async () => {
     try {
         console.log("Starting keystore generation utility")
@@ -144,11 +144,11 @@ async function importPlatformKey(userInfo, accountName, pwd) {
 
 
 function generateRandomAccountName() {
-    const r = (Math.random() + 1).toString(36).substring(9);
+    const r = (Math.random() + 1).toString(36).substring(12);
     return "myUsername".concat(r);
 }
 function generateRandomPassword() {
-    const r = (Math.random() + 1).toString(36).substring(9);
+    const r = (Math.random() + 1).toString(36).substring(12);
     return "SpamTankFoalUnit@12!".concat(r);
 }
 
