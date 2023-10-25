@@ -38,10 +38,10 @@ const main = async () => {
         parseCommandLineArgs()
         let user;
         let pwd;
-        let pkey;
         let chainData = {}
         const generatedAccounts = []; // Collect generated accounts
         for (let index = 0; index < iterations; index++) {
+            chainData = {}
             user = generateRandomAccountName()
             pwd = generateRandomPassword()
             chainData = await createAccount(chainData, user, pwd)
