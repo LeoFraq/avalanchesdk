@@ -37,14 +37,17 @@ const main = async () => {
         if (fs.existsSync("accounts.json")) {
             try {
                 const walletsJson = fs.readFileSync('accounts.json', 'utf8');
+                console.log("Loaded setup keys")
                 currentSetupKeys = JSON.parse(walletsJson);
+                console.log(currentSetupKeys)
+
             } catch (error) {
                 console.error('Error reading "accounts.json":', error.message);
                 process.exit(1);
             }
         }
 
-        const bl = await verifyBalance("X", userInfo["X"])
+        const bl = await verifyBalance("x", userInfo["x"])
         if (Number(bl.result.balance) > 0) {
             let waitTime = 250
             console.log("Balance:", bl)
@@ -61,6 +64,7 @@ const main = async () => {
                     "username": currentAddr.account.accountName,
                     "password": currentAddr.account.pwd
                 }
+                console.log("Logging parameters:", params)
                 currentAddr = currentSetupKeys[i % currentSetupKeys.length]["x"]
                 // Call the function
                 const result = await requestProcessor(methodName, params);
