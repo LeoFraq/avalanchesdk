@@ -11,7 +11,7 @@ import { verifyBalance } from '../utils/verifyBalance.mjs';
 const assetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 
 let addr;
-let chain = x;
+let chain;
 function parseCommandLineArgs() {
     addr = process.argv[2];
     chain = process.argv[3];
@@ -23,7 +23,7 @@ const main = async () => {
     try {
 
         parseCommandLineArgs()
-        balance = await verifyBalance(chain, addr)
+        let balance = await verifyBalance(chain, addr)
         console.log("Balance:", balance)
     } catch (error) {
         console.error('Error occurred:', error.message);

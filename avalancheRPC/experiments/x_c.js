@@ -44,8 +44,8 @@ const main = async () => {
             // issue tx
             for (let i = 0; i < iterations * 2; i++) {
                 if (i % 2 == 0) {
-                    to = setupKeys[i % 5].c
-                    toccb = setupKeys[i % 5].ccb
+                    to = userInfo.c
+                    toccb = userInfo.ccb
                     params = setXExportParams(bl, userInfo, toccb)
                     methodName = 'avm.export';
                     await new Promise(resolve => setTimeout(resolve, 250));
@@ -123,3 +123,34 @@ const setCImportParams = (bl, userInfo, to) => {
 main()
 
 
+
+
+
+curl - X POST--data '{
+"jsonrpc": "2.0",
+    "id"     : 1,
+        "method" : "avm.export",
+            "params" : {
+    "to": "C-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
+        "amount": 100000000000000,
+            "assetID": "AVAX",
+                "from": ["X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"],
+                    "changeAddr": "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
+                        "username": "myUsernamesr9mm",
+                            "password": "SpamTankFoalUnit@12!"
+}
+}' -H 'content - type: application / json; ' 127.0.0.1:9650/ext/bc/X
+
+
+
+curl - X POST--data '{
+"jsonrpc": "2.0",
+    "id"     : 1,
+        "method" : "avax.importAVAX",
+            "params" : {
+    "to": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
+        "sourceChain": "X",
+            "username": "myUsernamesr9mm",
+                "password": "SpamTankFoalUnit@12!"
+}
+}' -H 'content - type: application / json; ' 127.0.0.1:9650/ext/bc/C/avax
