@@ -4,6 +4,7 @@ import { loadOrGenerateUserInfo, verifyUserInfoHasAccount } from '../utils/loadO
 
 import { setupKeys } from '../utils/knownAddresses.mjs';
 import { verifyBalance } from '../utils/verifyBalance.mjs';
+import fs from "fs"
 
 
 // Parse command-line arguments to extract the methodName and additional parameters
@@ -47,18 +48,20 @@ const main = async () => {
         if (Number(bl.result.balance) > 0) {
             let waitTime = 250
             console.log("Balance:", bl)
+            let currentAddr = userInfo.x
             // issue tx
             for (let i = 0; i < iterations; i++) {
                 params = {
                     "assetID": assetID,
                     "amount": 10,
                     "to": setupKeys[i % 4].x,
-                    "from": [currentSetupKeys[i % currentSetupKeys.length]["x"]],
-                    "changeAddr": currentSetupKeys[i % currentSetupKeys.length]["x"],
+                    "from": [currentAddr.x],
+                    "changeAddr": currentAddr.x,
                     "memo": "hi, mom!",
-                    "username": userInfo.account.accountName,
-                    "password": userInfo.account.pwd
+                    "username": currentAddr.account.accountName,
+                    "password": currentAddr.account.pwd
                 }
+                currentAddr = currentSetupKeys[i % currentSetupKeys.length]["x"]
                 // Call the function
                 const result = await requestProcessor(methodName, params);
                 console.log(i, ": results:", result, " \n")
