@@ -22,9 +22,9 @@ function saveAccountsToJson(accounts) {
     const updatedAccounts = [...existingAccounts, ...accounts];
     // Imports each account to keystore
     updatedAccounts.forEach(element => {
-        if (!element.avmImport) { element = importAvmKey(element, element.account.username, element.account.pwd) }
-        if (!element.platformImport) { element = importAvmKey(element, element.account.username, element.account.pwd) }
-        if (!element.avaxImport) { element = importAvmKey(element, element.account.username, element.account.pwd) }
+        if (!element.avmImport) { element = importAvmKey(element, element.account.accountName, element.account.pwd) }
+        if (!element.platformImport) { element = importAvmKey(element, element.account.accountName, element.account.pwd) }
+        if (!element.avaxImport) { element = importAvmKey(element, element.account.accountName, element.account.pwd) }
     });
 
 
