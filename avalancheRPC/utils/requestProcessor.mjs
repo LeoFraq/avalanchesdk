@@ -93,6 +93,7 @@ function getEndpoint(methodName) {
         case 'eth_getAssetBalance':
         case 'eth_sendTransaction':
         case 'eth_signTransaction':
+        case 'eth_getBlockByNumber':
         case 'eth_getBalance':
             // case 'avax.importKey':
             return 'ext/bc/C/rpc'

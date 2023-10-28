@@ -29,6 +29,7 @@ const main = async () => {
         // validation
         processPHeight()
         processXHeight()
+        processCHeight()
     } catch (error) {
         console.error('Error occurred:', error.message);
         // Continue with your error handling logic, if needed
@@ -87,6 +88,50 @@ async function processPHeight() {
     }
 }
 
+async function processCHeight() {
+    // 
+    params = ["latest", true]
+    methodName = "eth_getBlockByNumber"
+    // Height
+    let result = await requestProcessor(methodName, params);
+    console.log("ETH get block by number:", result)
+    iterations = extractCHeight(result)
+
+    for (let i = 0; i < iterations; i++) {
+        params = [
+            "0x" + i.toString(16), "true"
+        ]
+        // Call the function
+        result = await requestProcessor(methodName, params);
+        console.log(i, ": results:", result, " \n")
+        // Delay for 100ms before the next invocation
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
+}
+
+function extractCHeight(jsonData) {
+    try {
+        // Parse the JSON string to a JavaScript object
+        const jsonObject = JSON.parse(jsonData);
+
+        // Access the "number" field from the JSON object and convert it to a decimal value
+        const decimalNumber = parseInt(jsonObject.result.number, 16);
+
+        return decimalNumber || 0;
+    } catch (error) {
+        console.error("Error: ", error);
+        return 0;
+    }
+}
 
 
 
+
+
+
+// curl -X POST --data '{
+//     "jsonrpc":"2.0",
+//     "id"     :1,
+//     "method" :"eth_getBalance",
+//     "params": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC", "latest"]
+// }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
