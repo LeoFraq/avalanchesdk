@@ -47,7 +47,7 @@ async function processXHeight() {
     methodName = "avm.getHeight"
     // Height
     iterations = await requestProcessor(methodName, params);
-
+    console.log("X height - iterations", iterations)
     methodName = "avm.getBlockByHeight"
     let result
     // issue tx
@@ -71,6 +71,7 @@ async function processPHeight() {
     methodName = "platform.getHeight"
     // Height
     iterations = await requestProcessor(methodName, params);
+    console.log("P height - iterations", iterations)
 
     methodName = "platform.getBlockByHeight"
     let result
@@ -112,10 +113,10 @@ async function processCHeight() {
 function extractCHeight(jsonData) {
     try {
         // Parse the JSON string to a JavaScript object
-        const jsonObject = JSON.parse(jsonData);
+        // const jsonObject = JSON.parse(jsonData);
 
         // Access the "number" field from the JSON object and convert it to a decimal value
-        const decimalNumber = parseInt(jsonObject.result.number, 16);
+        const decimalNumber = parseInt(jsonData.result.number, 16);
 
         return decimalNumber || 0;
     } catch (error) {
