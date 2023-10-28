@@ -27,9 +27,9 @@ const main = async () => {
         parseCommandLineArgs();
         // params = argv
         // validation
-        processPHeight()
-        processXHeight()
-        processCHeight()
+        await processPHeight()
+        await processXHeight()
+        await processCHeight()
     } catch (error) {
         console.error('Error occurred:', error.message);
         // Continue with your error handling logic, if needed
