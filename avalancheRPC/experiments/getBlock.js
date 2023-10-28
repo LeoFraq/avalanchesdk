@@ -100,7 +100,7 @@ async function processCHeight() {
 
     for (let i = 0; i < iterations; i++) {
         params = [
-            "0x" + i.toString(16), "true"
+            "0x" + i.toString(16), true
         ]
         // Call the function
         result = await requestProcessor(methodName, params);
