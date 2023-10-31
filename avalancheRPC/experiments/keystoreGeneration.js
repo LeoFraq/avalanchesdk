@@ -144,11 +144,11 @@ async function importPlatformKey(userInfo, accountName, pwd) {
 
 
 function generateRandomAccountName() {
-    const r = (Math.random() + 1).toString(36).substring(16);
+    const r = (Math.random() + 1).toString(36).substring(6);
     return "myUsername".concat(r);
 }
 function generateRandomPassword() {
-    const r = (Math.random() + 1).toString(36).substring(12);
+    const r = (Math.random() + 1).toString(36).substring(9);
     return "SpamTankFoalUnit@12!".concat(r);
 }
 
