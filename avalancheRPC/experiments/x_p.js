@@ -79,7 +79,7 @@ const setXExportParams = (bl, userInfo, to) => {
     console.log("Balance:", bl)
     params = {
         "assetID": "AVAX",
-        "amount": 10,
+        "amount": 100000,
         "to": to,
         "from": [userInfo["x"]],
         "changeAddr": userInfo["x"],

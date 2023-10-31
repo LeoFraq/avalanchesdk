@@ -129,10 +129,10 @@ function extractCHeight(jsonData) {
 
 
 
-
+// We first need to sign the eth transaction
 // curl -X POST --data '{
 //     "jsonrpc":"2.0",
 //     "id"     :1,
-//     "method" :"eth_getBalance",
-//     "params": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC", "latest"]
+//     "method" :"eth_sendTransaction",
+//     "params":[{"from": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC", "to": "0x93442D566Bb672D185c1904a39554Bfec47F7718", "value": "0x152d02c7e14af680000"}]
 // }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
