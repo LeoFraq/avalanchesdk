@@ -13,6 +13,7 @@ const assetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 
 const web3 = new Web3("http://localhost:9650/ext/bc/C/rpc")
 const main = async () => {
+    console.log("Web3", web3)
     const txcount = await web3.eth.getTransactionCount('0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC')
     console.log(txcount)
 
