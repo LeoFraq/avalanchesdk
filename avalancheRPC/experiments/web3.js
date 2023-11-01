@@ -26,48 +26,48 @@ const main = async () => {
 }
 
 
-const generateSimpleTransfer = async () => {
-    const originalMessage = [
-        {
-            type: "string",
-            name: "fullName",
-            value: "Satoshi Nakamoto",
-        },
-        {
-            type: "uint32",
-            name: "userId",
-            value: "1212",
-        },
-    ];
-    const params = [originalMessage, fromAddress];
-    const method = "eth_signTypedData";
-    const signedMessage = await web3.currentProvider.sendAsync({
-        id: 1,
-        method,
-        params,
-        fromAddress,
-    });
-    return signedMessage
-}
-const signTransaction = async () => {
-    const receipt = await web3.eth.signTransaction({
-        from: fromAddress,
-        to: destination,
-        value: amount,
-        maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
-        maxFeePerGas: "6000000000000", // Max fee per gas
-    });
-}
-const sendTx = () => {
-    // Submit transaction to the blockchain and wait for it to be mined
-    const receipt = await web3.eth.sendTransaction({
-        from: fromAddress,
-        to: destination,
-        value: amount,
-        maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
-        maxFeePerGas: "6000000000000", // Max fee per gas
-    });
-}
+// const generateSimpleTransfer = async () => {
+//     const originalMessage = [
+//         {
+//             type: "string",
+//             name: "fullName",
+//             value: "Satoshi Nakamoto",
+//         },
+//         {
+//             type: "uint32",
+//             name: "userId",
+//             value: "1212",
+//         },
+//     ];
+//     const params = [originalMessage, fromAddress];
+//     const method = "eth_signTypedData";
+//     const signedMessage = await web3.currentProvider.sendAsync({
+//         id: 1,
+//         method,
+//         params,
+//         fromAddress,
+//     });
+//     return signedMessage
+// }
+// const signTransaction = async () => {
+//     const receipt = await web3.eth.signTransaction({
+//         from: fromAddress,
+//         to: destination,
+//         value: amount,
+//         maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
+//         maxFeePerGas: "6000000000000", // Max fee per gas
+//     });
+// }
+// const sendTx = () => {
+//     // Submit transaction to the blockchain and wait for it to be mined
+//     const receipt = await web3.eth.sendTransaction({
+//         from: fromAddress,
+//         to: destination,
+//         value: amount,
+//         maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
+//         maxFeePerGas: "6000000000000", // Max fee per gas
+//     });
+// }
 
 main()
 
