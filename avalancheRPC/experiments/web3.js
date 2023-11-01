@@ -19,10 +19,10 @@ const main = async () => {
     // Check accounts on node
     web3.eth.getAccounts()
         .then(console.log);
-    let txId = generateSimpleTransfer()
-    let signedTx = signTransaction(txId)
+    // let txId = generateSimpleTransfer()
+    // let signedTx = signTransaction(txId)
 
-    sendTx(signedTx)
+    // sendTx(signedTx)
 }
 
 
