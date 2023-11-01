@@ -67,36 +67,6 @@ const main = async () => {
 };
 
 /*
-// Request
-curl -X POST --data '{"id": 1,"jsonrpc": "2.0","method": "eth_signTransaction","params":
- [
-    {
-    "from": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
-    "gas": "0x76c0",
-    "gasPrice":     "0x9184e72a000",
-    "to": "0x93442D566Bb672D185c1904a39554Bfec47F7718",
-    "value": "0x1",
-    "nonce": "0x0"
-    "data": "0xa9059cbb0000000000000000000000000x93442D566Bb672D185c1904a39554Bfec47F77180000000000000000000000000000000000000000000000000000000000000001"
-}]}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-
-
-curl -X POST --data '{"id": 1,"jsonrpc": "2.0","method": "eth_sendTransaction","params":
- [
-    {
-    "from": "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC",
-    "gas": "0x76c0",
-    "gasPrice":     "0x9184e72a000",
-    "to": "0x93442D566Bb672D185c1904a39554Bfec47F7718",
-    "value": "0x1",
-    "nonce": "0x0",
-    "data": "0xa9059cbb0000000000000000000000000x93442D566Bb672D185c1904a39554Bfec47F77180000000000000000000000000000000000000000000000000000000000000001"
-}]}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/avax
-
-
-
-
-// Result
   params: [
     {
       to: '0x93442D566Bb672D185c1904a39554Bfec47F7718',
@@ -148,3 +118,27 @@ main()
 
 
 
+
+
+// transaction := generateSimpleTransfer(chainid, accounts[i], tipCap, feeCap, 1, 1)  -> unsigned TxId
+// func generateSimpleTransfer(chainid *big.Int, reciever accounts.Account, tipCap *big.Int, feeCap *big.Int, nonce uint64, value int64) *types.Transaction {
+
+// 	gasLimit := uint64(21000)
+// 	v := new(big.Int).Mul(big.NewInt(value), big.NewInt(params.Ether))
+
+// 	tx := types.NewTx(
+// 		&types.DynamicFeeTx{
+// 			ChainID:   chainid,
+// 			Nonce:     nonce,
+// 			GasTipCap: tipCap,
+// 			GasFeeCap: feeCap,
+// 			Gas:       gasLimit,
+// 			To:        &reciever.Address,
+// 			Value:     v,
+// 			Data:      nil,
+// 		})
+
+// 	return tx
+// }
+// transaction = accountManager.SignTransaction(transaction, *masterAccount, chainid) -> Signed TxId
+// SendTransactionToExecutionClient(masterClient, &t.TransactionEvalInfo{Transaction: transaction}, nil) -> Sends Tx to 
