@@ -23,6 +23,8 @@ const args = process.argv.slice(2);
 const assetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 const web3 = new Web3("http://localhost:9650/ext/bc/C/rpc")
 
+// curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'  -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/C/rpc
+
 const main = async () => {
     // console.log("Web3", web3)
     // const txcount = await web3.eth.getTransactionCount('0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC')
@@ -42,16 +44,50 @@ const main = async () => {
 
 // 56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027 for primary faucet - 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 const unlockAccount = async (pkey, caddr, pwd) => {
-    await web3.eth.personal.importRawKey(pkey, pwd)
-    // Wait for change to propagate
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    await web3.personal.unlockAccount(caddr, pwd, 300000)
+    try {
+        await web3.eth.personal.importRawKey(pkey, pwd)
+        // Wait for change to propagate
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        await web3.eth.personal.unlockAccount(caddr, pwd, 300000)
+    }
+    catch (error) { console.error("Issue while unlocking account, ", error) }
 }
+
 
 const generateTransfer = (iterations, userInfo) => {
-    let tx = { from: userInfo.c, to: userInfo.c, value: web3.utils.toWei(0.05, "ether") }
-    for (let index = 0; index < iterations; index++) {
-        web3.eth.sendTransaction(tx)
-
+    try {
+        let tx = { from: userInfo.c, to: userInfo.c, value: web3.utils.toWei(0.05, "ether") }
+        let result;
+        for (let index = 0; index < iterations; index++) {
+            result = web3.eth.sendTransaction(tx)
+            console.log("Tx result:", result)
+            const data = {
+                Method: "eth.send_Transaction",
+                Result: JSON.stringify(result),
+                Duration_ms: duration
+            };
+            // Write the data to the log file in CSV format
+            writeToCSVFile(`logs/eth.send_Transaction.csv`, data);
+        }
+    } catch (error) {
+        console.error("Web3 error:", error)
+        writeToCSVFile(`logs/exceptions/eth.send_Transaction.csv`, data);
     }
 }
+
+
+// Function to write data to a CSV file
+function writeToCSVFile(fileName, data) {
+    // Extract the directory path from the fileName
+    const directory = path.dirname(fileName);
+    // Create the directory (and its parent directories) if they don't exist
+    if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory, { recursive: true });
+    }
+    // Format the data as a CSV string
+    const csvContent = Object.values(data).join('|') + '\n';
+    // Append the CSV content to the file
+    fs.appendFileSync(fileName, csvContent);
+}
+
+main()
