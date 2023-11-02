@@ -4,6 +4,9 @@ import { loadOrGenerateUserInfo, verifyUserInfoHasAccount } from '../utils/loadO
 
 import { setupKeys } from '../utils/knownAddresses.mjs';
 import { verifyBalance } from '../utils/verifyBalance.mjs';
+import path from 'path';
+import fs from "fs";
+
 import { Web3 } from "web3" // repl  const { Web3 } = await import("web3");
 // const web3 = new Web3("ws://localhost:9650/ext/bc/C/ws")
 // // const web3 = new Web3("http://localhost:9650/ext/bc/C/rpc")
