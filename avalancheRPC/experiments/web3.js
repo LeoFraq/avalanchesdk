@@ -58,7 +58,13 @@ const generateTransfer = (iterations, userInfo) => {
     try {
         let tx = { from: userInfo.c, to: userInfo.c, value: web3.utils.toWei(0.05, "ether") }
         let result;
+        let startTime = performance.now();
+        let endTime
+        let duration
         for (let index = 0; index < iterations; index++) {
+            startTime = performance.now();
+            endTime = performance.now();
+            duration = endTime - startTime;
             result = web3.eth.sendTransaction(tx)
             console.log("Tx result:", result)
             const data = {
@@ -71,7 +77,7 @@ const generateTransfer = (iterations, userInfo) => {
         }
     } catch (error) {
         console.error("Web3 error:", error)
-        writeToCSVFile(`logs/exceptions/eth.send_Transaction.csv`, data);
+        writeToCSVFile(`logs/exceptions/eth.send_Transaction.csv`, error);
     }
 }
 
