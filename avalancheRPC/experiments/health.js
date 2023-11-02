@@ -32,12 +32,22 @@ const main = async () => {
         }
         console.log("Params", params)
         // issue tx
-        for (let i = 0; i < iterations; i++) {
-            // Call the function
+        let isHealthy = false
+        let failureCounter = 0
+        // Call the function
+        while (!isHealthy) {
             const result = await requestProcessor(methodName, params);
-            console.log(i, ": results:", result)
-            // Delay for 100ms before the next invocation
-            await new Promise(resolve => setTimeout(resolve, 100));
+            console.log("health results:", result)
+            if (result.healthy == true) {
+                isHealthy = true
+            }
+            // Wait 5 seconds
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            console.log("Health failure check", failureCounter)
+            if (failureCounter >= 120) {
+                console.error("Health check failed for ", failureCounter * 5, " seconds, quitting")
+                process.exit(1)
+            }
         }
     } catch (error) {
         console.error('Error occurred:', error.message);

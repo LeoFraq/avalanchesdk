@@ -51,7 +51,7 @@ const unlockAccount = async (pkey, caddr, pwd) => {
         await web3.eth.personal.importRawKey(pkey, pwd)
         // Wait for change to propagate
         await new Promise(resolve => setTimeout(resolve, 2000));
-        await web3.eth.personal.unlockAccount(caddr, pwd, 300000)
+        await web3.eth.personal.unlockAccount(caddr, pwd, 30000000)
     }
     catch (error) { console.error("Issue while unlocking account, ", error) }
 }
