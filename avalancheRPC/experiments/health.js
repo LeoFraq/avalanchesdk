@@ -38,12 +38,13 @@ const main = async () => {
         while (!isHealthy) {
             const result = await requestProcessor(methodName, params);
             console.log("health results:", result)
-            if (result.healthy == true) {
+            if (result.result.healthy == true) {
                 isHealthy = true
             }
             // Wait 5 seconds
             await new Promise(resolve => setTimeout(resolve, 5000));
             console.log("Health failure check", failureCounter)
+            failureCounter++
             if (failureCounter >= 120) {
                 console.error("Health check failed for ", failureCounter * 5, " seconds, quitting")
                 process.exit(1)
