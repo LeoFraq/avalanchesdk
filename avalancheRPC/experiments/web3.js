@@ -53,7 +53,12 @@ const unlockAccount = async (pkey, caddr, pwd) => {
         await new Promise(resolve => setTimeout(resolve, 2000));
         await web3.eth.personal.unlockAccount(caddr, pwd, 30000000)
     }
-    catch (error) { console.error("Issue while unlocking account, ", error) }
+    catch (error) {
+        if (error instanceof Error && error.message.includes('account already exists')) {
+            return; // Return without logging the error
+        }
+        console.error("Issue while unlocking account, ", error)
+    }
 }
 
 
@@ -100,3 +105,24 @@ function writeToCSVFile(fileName, data) {
 }
 
 main()
+
+
+// install
+// npx hardhat compile -- Fix contracts
+// npx hardhat run scripts/deploy/ts --network local
+/*
+    - name: Run the hardhat command and extract the contract address
+      shell: npx hardhat run scripts/deploy.ts --show-stack-traces --network local | grep 'Coin deployed to:' | awk -F': ' '{print $2}'
+      register: contract_address_output
+
+    - name: Set the contract address as an Ansible variable
+      set_fact:
+        contract_address: "{{ contract_address_output.stdout | replace('\n', '') }}"
+
+    - debug:
+        msg: "Contract Address: {{ contract_address }}"
+
+- Edit deploy script for each contract
+- Create An Ethers deploy for each contract
+- Adapt sol contracts
+*/
