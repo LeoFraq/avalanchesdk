@@ -46,12 +46,10 @@ const main = async () => {
     const userInfo = await verifyUserInfoHasAccount(userInfo);
     const Contract = await ethers.getContractFactory(contractName);
     const contract = await Contract.attach(contractAddr);
-
     let result = await contract.transfer(userInfo.c, 1000)
     console.log("Transfer contract result: ", result)
     let mint = await confirm.mint(userInfo.c, 10, iterations)
     console.log("Coin mint contract result: ", mint)
-
 }
 
 
