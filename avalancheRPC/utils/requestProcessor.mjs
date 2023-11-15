@@ -26,6 +26,7 @@ function writeToCSVFile(fileName, data) {
 export async function requestProcessor(methodName, params) {
     const startTime = performance.now();
     let endpoint = getEndpoint(methodName);
+    let isLocal = checkLocalEndpointMethods(methodName)
 
     try {
         const result = await sendJsonRpcRequest(methodName, params, endpoint);
@@ -112,5 +113,30 @@ function getEndpoint(methodName) {
             return 'unknown method: '.concat(methodName); // Return a default value if the endpoint is not recognized
     }
 
+}
+
+function checkLocalEndpointMethods(methodName) {
+
+    switch (methodName) {
+        case 'info':
+        case 'avax.importKey':
+        case 'avax.import':
+        case 'avm.importKey':
+        case 'keystore.createUser':
+        case 'eth_signTransaction':
+        case 'eth_getBlockByNumber':
+        case 'avm.export':
+        case 'avm.issueTx':
+
+        case 'avm.getBlockByHeight':
+        case 'platform.importKey':
+        case 'platform.importAVAX':
+        case 'platform.getBlockByHeight':
+        case 'platform.exportKey':
+
+            return true
+        default:
+            return false
+    }
 }
 

@@ -11,14 +11,16 @@ const contentType = 'application/json';
 // Define the base URL for your JSON-RPC endpoint
 // "curl -X POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"health.health"}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health"
 // Function to send a JSON-RPC request
-export async function sendJsonRpcRequest(method, params, endpoint) {
+export async function sendJsonRpcRequest(method, params, endpoint, local) {
     let validIP = readAvailableIPs()
     validIP.push(IP + ":" + PORT)
 
     // Choose a random IP from the validIPs array
     const randomIP = validIP[Math.floor(Math.random() * validIP.length)];
-    const baseURL = `http://${randomIP}/${endpoint}`;
-
+    let baseURL = `http://${randomIP}/${endpoint}`;
+    if (local) {
+        baseURL = `http://${IP}:${PORT}/${endpoint}`;
+    }
     const requestData = {
         jsonrpc: '2.0',
         id: id,
@@ -26,8 +28,6 @@ export async function sendJsonRpcRequest(method, params, endpoint) {
         params: params,
     };
 
-    // console.log("SendJsonRequest, at", baseURL)
-    // console.log("SendJsonRequest, params", requestData)
     try {
 
         const response = await axios.post(baseURL, requestData, {
