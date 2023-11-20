@@ -18,7 +18,7 @@ export async function sendJsonRpcRequest(method, params, endpoint, local) {
     // Choose a random IP from the validIPs array
     const randomIP = validIP[Math.floor(Math.random() * validIP.length)];
     let baseURL = `http://${randomIP}/${endpoint}`;
-    if (local) {
+    if (true) {
         baseURL = `http://${IP}:${PORT}/${endpoint}`;
     }
     const requestData = {
