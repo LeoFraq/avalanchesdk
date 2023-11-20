@@ -54,7 +54,7 @@ const readAvailableIPs = () => {
         const bootstrapIps = jsonData['bootstrap-ips'];
 
         // Split the string into an array of IP:Port values
-        const ipsArray = bootstrapIps.split(',');
+        const ipsArray = bootstrapIps.split(', ');
 
         // Do something with the array of IPs, for example, log them
         console.log('Available IPs:');
