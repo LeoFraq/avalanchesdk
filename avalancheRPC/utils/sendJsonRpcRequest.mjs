@@ -12,30 +12,24 @@ const contentType = 'application/json';
 // "curl -X POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"health.health"}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/health"
 // Function to send a JSON-RPC request
 export async function sendJsonRpcRequest(method, params, endpoint, local) {
-    let validIP = readAvailableIPs()
-    validIP.push(IP + ":" + PORT)
-
+    // let validIP = readAvailableIPs()
+    // validIP.push(IP + ":" + PORT)
     // Choose a random IP from the validIPs array
-    const randomIP = validIP[Math.floor(Math.random() * validIP.length)];
-    let baseURL = `http://${randomIP}/${endpoint}`;
-    if (true) {
-        baseURL = `http://${IP}:${PORT}/${endpoint}`;
-    }
+    // const randomIP = validIP[Math.floor(Math.random() * validIP.length)];
+    let baseURL = `http://${IP}:${PORT}/${endpoint}`;
+    //  = `http://${randomIP}/${endpoint}`;
     const requestData = {
         jsonrpc: '2.0',
         id: id,
         method: method,
         params: params,
     };
-
     try {
-
         const response = await axios.post(baseURL, requestData, {
             headers: {
                 'Content-Type': contentType,
             },
         });
-
         // Handle the response here
         console.log('Response:', response.data);
         return response.data;
@@ -52,16 +46,13 @@ const readAvailableIPs = () => {
         const data = fs.readFileSync('IP.json', 'utf8');
         const jsonData = JSON.parse(data);
         const bootstrapIps = jsonData['bootstrap-ips'];
-
         // Split the string into an array of IP:Port values
         const ipsArray = bootstrapIps.split(', ');
-
         // Do something with the array of IPs, for example, log them
         console.log('Available IPs:');
         ipsArray.forEach(ip => {
             console.log(ip);
         });
-
         return ipsArray;
     } catch (error) {
         console.error('Error reading IPs from IP.json:', error.message);
