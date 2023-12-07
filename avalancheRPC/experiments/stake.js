@@ -15,7 +15,10 @@ let methodName = 'platform.addValidator';
 let params = {};
 let nodeID = ""
 
-
+// Function to parse command-line arguments
+function parseCommandLineArgs() {
+    nodeID = process.argv[2];
+}
 
 /**
  * {
@@ -35,7 +38,8 @@ const main = async () => {
     try {
         let userInfo = await loadOrGenerateUserInfo();
         userInfo = await verifyUserInfoHasAccount(userInfo);
-        nodeID = await getNodeId();
+        // nodeID = await getNodeId();
+        parseCommandLineArgs();
         const now = new Date();
         const startDate = new Date(now.getTime() + 1 * 60 * 1000); // 1 minutes in milliseconds
         const endDate = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000); // 2 days in milliseconds
