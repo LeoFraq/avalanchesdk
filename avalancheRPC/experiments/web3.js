@@ -62,7 +62,7 @@ const unlockAccount = async (pkey, caddr, pwd) => {
 }
 
 
-const generateTransfer = (iterations, userInfo) => {
+const generateTransfer = async (iterations, userInfo) => {
     try {
         let tx = { from: userInfo.c, to: userInfo.c, value: web3.utils.toWei(0.05, "ether") }
         let result;
@@ -71,9 +71,9 @@ const generateTransfer = (iterations, userInfo) => {
         let duration
         for (let index = 0; index < iterations; index++) {
             startTime = performance.now();
+            result = await web3.eth.sendTransaction(tx)
             endTime = performance.now();
             duration = endTime - startTime;
-            result = web3.eth.sendTransaction(tx)
             console.log("Tx result:", result)
             const data = {
                 Method: "eth.send_Transaction",
