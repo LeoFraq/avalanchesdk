@@ -90,7 +90,6 @@ const setXExportParams = (bl, userInfo, to) => {
     params = {
         "assetID": "AVAX",
         "amount": 100000000000000,
-        "baseFee": 1,
         "to": to,
         "from": [userInfo["x"]],
         "changeAddr": userInfo["x"],
