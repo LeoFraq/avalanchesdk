@@ -77,7 +77,7 @@ const generateTransfer = async (iterations, userInfo) => {
             console.log("Tx result:", result)
             const data = {
                 Method: "eth.send_Transaction",
-                Result: JSON.stringify(result),
+                Result: result,
                 Duration_ms: duration
             };
             // Write the data to the log file in CSV format
