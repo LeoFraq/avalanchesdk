@@ -36,7 +36,7 @@ const main = async () => {
             let waitTime = 250
             console.log("Balance:", bl)
             // issue tx
-            for (let i = 0; i < iterations; i++) {
+            for (let i = 0; i < 1; i++) {
                 params = buildParams(userInfo)
                 // Call the function
                 const result = await requestProcessor(methodName, params);
@@ -90,7 +90,7 @@ function buildParams(userInfo) {
         outputs.push(
             {
                 "assetID": assetID,
-                "amount": 100000000000,
+                "amount": 100000000000 * iterations,
                 "to": element.x
             }
         )
