@@ -41,6 +41,9 @@ const main = async () => {
             */
             let to
             let toccb
+            // const walletsJson = fs.readFileSync('accounts.json', 'utf8');
+            // console.log("Loaded setup keys")
+            // currentSetupKeys = JSON.parse(walletsJson);
             // issue tx
             for (let i = 0; i < iterations * 2; i++) {
                 if (i % 2 == 0) {

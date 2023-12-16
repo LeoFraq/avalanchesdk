@@ -56,7 +56,7 @@ const main = async () => {
             for (let i = 0; i < iterations; i++) {
                 params = {
                     "assetID": assetID,
-                    "amount": 10,
+                    "amount": 1,
                     "to": setupKeys[i % 4].x,
                     "from": [currentAddr.x],
                     "changeAddr": currentAddr.x,
