@@ -17,7 +17,7 @@ let iterations = 1
 
 // Function to parse command-line arguments
 function parseCommandLineArgs() {
-    iterations = 1
+    iterations = process.argv[2];
 }
 // This is just sendMultiple with a big value
 const main = async () => {
