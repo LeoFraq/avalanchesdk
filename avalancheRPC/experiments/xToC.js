@@ -90,6 +90,7 @@ const setXExportParams = (bl, userInfo, to) => {
     params = {
         "assetID": "AVAX",
         "amount": 100000000000000,
+        "baseFee": 1,
         "to": to,
         "from": [userInfo["x"]],
         "changeAddr": userInfo["x"],
@@ -115,6 +116,7 @@ const setCImportParams = (bl, userInfo, to) => {
     params = {
         "to": to,
         "sourceChain": "X",
+        "baseFee": 1,
         "username": userInfo.account.accountName,
         "password": userInfo.account.pwd
     }
