@@ -15,7 +15,7 @@ const fs = require('fs');
 
 
 
-let contractName = 'Coin';
+let contractName = 'Storage';
 let contractAddr = ""
 let iterations = 100
 
@@ -42,9 +42,13 @@ const main = async () => {
     const contract = await Contract.attach(contractAddr);
     // let result = await contract.transfer(userInfo.c, 1000)
     // console.log("Transfer contract result: ", result)
-    let mint = await contract.mint(userInfo.c, 10, iterations)
-    console.log("Coin mint contract result: ", mint)
-    writeToCSVFile('logs/coin.csv', mint)
+    for (let index = 0; index < iterations; index++) {
+        let mint = await contract.store(userInfo.c, index)
+        console.log("Storage store contract result: ", mint)
+        writeToCSVFile('logs/store.csv', mint)
+
+    }
+
 }
 // Read data from smartContracts.json
 function readSmartContractsData() {
