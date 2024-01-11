@@ -44,7 +44,7 @@ const main = async () => {
     // console.log("Transfer contract result: ", result)
     for (let index = 0; index < iterations; index++) {
         let url = "url".concat(index.toString())
-        let mint = await contract.upload(userInfo.c, url)
+        let mint = await contract.upload(url)
         console.log("Youtube upload contract result: ", mint)
         writeToCSVFile('logs/youtube.csv', mint)
 

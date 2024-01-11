@@ -43,7 +43,7 @@ const main = async () => {
     // let result = await contract.transfer(userInfo.c, 1000)
     // console.log("Transfer contract result: ", result)
     for (let index = 0; index < iterations; index++) {
-        let mint = await contract.store(userInfo.c, index)
+        let mint = await contract.store(index)
         console.log("Storage store contract result: ", mint)
         writeToCSVFile('logs/store.csv', mint)
 
