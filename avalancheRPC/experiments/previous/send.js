@@ -14,14 +14,11 @@ const assetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 // Initialize default values
 let methodName = 'avm.send';
 let params = {};
-
-let time = 60 // Seconds
-let tps = 1
+let iterations = 1
 
 // Function to parse command-line arguments
 function parseCommandLineArgs() {
-    time = process.argv[2];
-    tps = process.argv[3];
+    iterations = process.argv[2];
 }
 
 
@@ -49,38 +46,35 @@ const main = async () => {
                 process.exit(1);
             }
         }
-        let counter = 0;
+
         const bl = await verifyBalance("x", userInfo["x"])
         if (Number(bl.result.balance) > 0) {
+            let waitTime = 250
+            console.log("Balance:", bl)
             let currentAddr = userInfo
             // issue tx
-            const intervalId = setInterval(async () => {
-                for (let i = 0; i < tps; i++) {
-                    const params = {
-                        "assetID": assetID,
-                        "amount": 1,
-                        "to": setupKeys[i % 4].x,
-                        "from": [currentAddr.x],
-                        "changeAddr": currentAddr.x,
-                        "memo": "hi, mom!",
-                        "username": currentAddr.account.accountName,
-                        "password": currentAddr.account.pwd
-                    };
-                    console.log("Logging parameters:", params);
-                    currentAddr = currentSetupKeys[counter % currentSetupKeys.length];
-                    // We loop through all existing addresses
-                    counter++
-                    // Call the function
-                    const result = await requestProcessor(methodName, params);
-                    console.log(i, ": results:", result, " \n");
+            for (let i = 0; i < iterations; i++) {
+                params = {
+                    "assetID": assetID,
+                    "amount": 1,
+                    "to": setupKeys[i % 4].x,
+                    "from": [currentAddr.x],
+                    "changeAddr": currentAddr.x,
+                    "memo": "hi, mom!",
+                    "username": currentAddr.account.accountName,
+                    "password": currentAddr.account.pwd
                 }
-            }, 1000); // Execute the loop every second
-
-            // Stop the loop after M seconds
-            setTimeout(() => {
-                clearInterval(intervalId);
-                console.log(`Loop stopped after ${time} seconds.`);
-            }, time * 1000);
+                console.log("Logging parameters:", params)
+                currentAddr = currentSetupKeys[i % currentSetupKeys.length]
+                // Call the function
+                const result = await requestProcessor(methodName, params);
+                console.log(i, ": results:", result, " \n")
+                // The required delay varies as the load increases, this tries to "harmonize" the errors
+                // It is an imperfect solution, if we want to achieve anything else we should probably use sendMultiple
+                waitTime = calculateWaitTime(result, waitTime)
+                // Delay for 100ms before the next invocation
+                await new Promise(resolve => setTimeout(resolve, waitTime));
+            }
         } else {
             console.error("Balance is wrong", bl)
         }
@@ -95,6 +89,23 @@ const main = async () => {
 main()
 
 
+let consecutiveSuccess = 0
+function calculateWaitTime(result, waitTime) {
+    if (result.result && result.result.txID) {
+        consecutiveSuccess++
+        if (consecutiveSuccess % 3 == 0) { waitTime -= 50; }
+    } else if (result.error) {
+        // JSON-RPC response is in "increase" format
+        waitTime += 100; // Increase wait time by 100ms
+        consecutiveSuccess = 0
+    } else {
+        // A straight up error
+        console.error("How did you get here?")
+    }
+    // Minimum delay
+    if (waitTime <= 10) waitTime = 10
+    return waitTime;
+}
 
 
 

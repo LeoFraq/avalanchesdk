@@ -14,14 +14,11 @@ import { Web3 } from "web3" // repl  const { Web3 } = await import("web3");
 
 // internal - personal
 
-let time = 60 // Seconds
-let tps = 1
+let iterations = 1
 
 // Function to parse command-line arguments
 function parseCommandLineArgs() {
-
-    time = process.argv[2];
-    tps = process.argv[3];
+    iterations = process.argv[2];
 }
 
 // Parse command-line arguments to extract the methodName and additional parameters
@@ -38,20 +35,17 @@ const main = async () => {
     let userInfo = await loadOrGenerateUserInfo()
     // This currently only works with this known raw address for the faucet
     // await unlockAccount("56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027", userInfo.c, userInfo.account.pwd)
-    const intervalId = setInterval(async () => {
-        generateTransfer(userInfo)
-    }, 1000) // Execute loo every second
-    // End experiment
-    setTimeout(() => {
-        clearInterval(intervalId);
-        console.log(`Loop stopped after ${time} seconds.`);
-    }, time * 1000);
+    generateTransfer(iterations, userInfo)
     // // Check accounts on node
     // web3.eth.getAccounts()
     //     .then(console.log);
+    // let txId = generateSimpleTransfer()
+    // let signedTx = signTransaction(txId)
+
+    // sendTx(signedTx)
 }
 
-//  addr for primary faucet - 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC - requires kerchak256 encoded pkey
+//  for primary faucet - 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC
 const unlockAccount = async (pkey, caddr, pwd) => {
     try {
         await web3.eth.personal.importRawKey(pkey, pwd)
@@ -68,14 +62,14 @@ const unlockAccount = async (pkey, caddr, pwd) => {
 }
 
 
-const generateTransfer = async (userInfo) => {
+const generateTransfer = async (iterations, userInfo) => {
     try {
         let tx = { from: userInfo.c, to: userInfo.c, value: web3.utils.toWei(0.05, "ether") }
         let result;
         let startTime = performance.now();
         let endTime
         let duration
-        for (let index = 0; index < tps; index++) {
+        for (let index = 0; index < iterations; index++) {
             startTime = performance.now();
             result = await web3.eth.sendTransaction(tx)
             endTime = performance.now();
