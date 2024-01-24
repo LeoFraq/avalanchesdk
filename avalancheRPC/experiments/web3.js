@@ -51,7 +51,7 @@ const main = async () => {
     //     .then(console.log);
 }
 
-//  addr for primary faucet - 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC - requires kerchak256 encoded pkey
+//  addr for primary faucet - 0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC - requires (de?)encoded pkey
 const unlockAccount = async (pkey, caddr, pwd) => {
     try {
         await web3.eth.personal.importRawKey(pkey, pwd)
