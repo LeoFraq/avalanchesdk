@@ -19,20 +19,6 @@ let contractName = 'Coin';
 let contractAddr = ""
 let iterations = 100
 
-// function parseCommandLineArgs() {
-//     if (process.argv[3]) {
-//         contractName = process.argv[2];
-//         iterations = process.argv[3];
-//         readSmartContractsData()
-//     }
-// }
-
-/*
-Run details
-- deploy respective contract XXXdeploy.ts
-- make sure main account (faucet) is enabled on C-chain, see geth scripts
-- run script
-*/
 
 const main = async () => {
     // parseCommandLineArgs();
@@ -40,8 +26,6 @@ const main = async () => {
     const userInfo = readUserInfo()
     const Contract = await ethers.getContractFactory(contractName);
     const contract = await Contract.attach(contractAddr);
-    // let result = await contract.transfer(userInfo.c, 1000)
-    // console.log("Transfer contract result: ", result)
     let mint = await contract.mint(userInfo.c, 10, iterations)
     console.log("Coin mint contract result: ", mint)
     writeToCSVFile('logs/coin.csv', mint)
