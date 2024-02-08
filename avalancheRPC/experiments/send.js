@@ -59,14 +59,14 @@ const main = async () => {
                     const params = {
                         "assetID": assetID,
                         "amount": 1,
-                        "to": setupKeys[i % 4].x,
+                        "to": currentSetupKeys[counter + 1 % currentSetupKeys.length],
                         "from": [currentAddr.x],
                         "changeAddr": currentAddr.x,
                         "memo": "hi, mom!",
                         "username": currentAddr.account.accountName,
                         "password": currentAddr.account.pwd
                     };
-                    console.log("Logging parameters:", params);
+                    // console.log("Logging parameters:", params);
                     currentAddr = currentSetupKeys[counter % currentSetupKeys.length];
                     // We loop through all existing addresses
                     counter++
