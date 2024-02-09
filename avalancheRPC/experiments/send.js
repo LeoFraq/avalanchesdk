@@ -66,7 +66,7 @@ const main = async () => {
                         "username": currentAddr.account.accountName,
                         "password": currentAddr.account.pwd
                     };
-                    // console.log("Logging parameters:", params);
+                    console.log("Logging parameters:", params);
                     currentAddr = currentSetupKeys[counter % currentSetupKeys.length];
                     // We loop through all existing addresses
                     counter++
