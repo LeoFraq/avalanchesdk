@@ -59,20 +59,20 @@ const main = async () => {
                     const params = {
                         "assetID": assetID,
                         "amount": 1,
-                        "to": currentSetupKeys[counter + 1 % currentSetupKeys.length].x,
+                        "to": currentSetupKeys[counter + 2 % currentSetupKeys.length].x,
                         "from": [currentAddr.x],
                         "changeAddr": currentAddr.x,
                         "memo": "hi, mom!",
                         "username": currentAddr.account.accountName,
                         "password": currentAddr.account.pwd
                     };
-                    console.log("Logging parameters:", params);
+                    // console.log("Logging parameters:", params);
                     currentAddr = currentSetupKeys[counter % currentSetupKeys.length];
                     // We loop through all existing addresses
                     counter++
                     // Call the function
                     const result = await requestProcessor(methodName, params);
-                    console.log(i, ": results:", result, " \n");
+                    // console.log(i, ": resklts:", result, " \n");
                 }
             }, 1000); // Execute the loop every second
 
