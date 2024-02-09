@@ -59,7 +59,7 @@ const main = async () => {
                     const params = {
                         "assetID": assetID,
                         "amount": 1,
-                        "to": currentSetupKeys[counter + 1 % currentSetupKeys.length],
+                        "to": currentSetupKeys[counter + 1 % currentSetupKeys.length].x,
                         "from": [currentAddr.x],
                         "changeAddr": currentAddr.x,
                         "memo": "hi, mom!",
@@ -98,3 +98,34 @@ main()
 
 
 
+// curl -X POST --data '{
+//     "jsonrpc":"2.0",
+//     "id"     :1,
+//     "method" :"avm.send",
+//     "params" : {
+//         "assetID": '2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe',
+//         "amount": 1,
+//         "to": 'X-local1qf28qgec8lfey8jqqg3c9rmawplxpczhhwgh50',
+//         "from": [ 'X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u' ],
+//         "changeAddr": 'X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u',
+//         "memo": 'hi, mom!',
+//         "username": 'myUsernamesr9mm',
+//         "password": 'SpamTankFoalUnit@12!'
+//       }
+// }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
+
+// curl -X POST --data '{
+//     "jsonrpc":"2.0",
+//     "id"     :1,
+//     "method" :"avm.send",
+//     "params" :{
+//         "assetID"   : "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe",
+//         "amount"    : 10000,
+//         "to"        : "X-local1qf28qgec8lfey8jqqg3c9rmawplxpczhhwgh50",
+//         "from"      : ["X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"],
+//         "changeAddr": "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u",
+//         "memo"      : "hi, mom!",
+//         "username"  : "myUsernamesr9mm",
+//         "password"  : "SpamTankFoalUnit@12!"
+//     }
+// }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
