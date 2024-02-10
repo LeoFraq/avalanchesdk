@@ -93,7 +93,7 @@ function buildParams(userInfo) {
         outputs.push(
             {
                 "assetID": assetID,
-                "amount": 10,
+                "amount": 1000,
                 "to": element.x
             }
         )
