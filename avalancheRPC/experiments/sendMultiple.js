@@ -34,13 +34,13 @@ const main = async () => {
         // verify send multiple
         const bl = await verifyBalance("x", userInfo["x"])
         if (Number(bl.result.balance) > 0) {
-            let waitTime = 250
+            let waitTime = 2500
             console.log("Balance:", bl)
             // issue tx
 
             for (let i = 0; i < iterations; i++) {
                 const outputsChunks = chunkArray(buildOutputs(userInfo), CHUNK_SIZE);
-                console.log(outputsChunks)
+                // console.log(outputsChunks)
                 for (let j = 0; j < outputsChunks.length; j++) {
                     const params = {
                         "outputs": outputsChunks[j],
