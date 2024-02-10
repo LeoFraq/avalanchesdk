@@ -46,7 +46,7 @@ const main = async () => {
 
             } catch (error) {
                 console.error('Error reading "accounts.json":', error.message);
-                process.exit(1);
+                // process.exit(0);
             }
         }
         let counter = 0;
