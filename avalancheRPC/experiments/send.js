@@ -59,7 +59,7 @@ const main = async () => {
                     const params = {
                         "assetID": assetID,
                         "amount": 1,
-                        "to": currentSetupKeys[counter + 2 % currentSetupKeys.length].x,
+                        "to": currentSetupKeys[counter % currentSetupKeys.length].x,
                         "from": [currentAddr.x],
                         "changeAddr": currentAddr.x,
                         "memo": "hi, mom!",
