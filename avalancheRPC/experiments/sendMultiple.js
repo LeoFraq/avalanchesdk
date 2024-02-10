@@ -14,7 +14,7 @@ const assetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 let methodName = 'avm.sendMultiple';
 let params = {};
 let iterations = 1
-
+const CHUNK_SIZE = 100; // Define your chunk size
 // Function to parse command-line arguments
 function parseCommandLineArgs() {
     iterations = process.argv[2];
@@ -37,16 +37,25 @@ const main = async () => {
             let waitTime = 250
             console.log("Balance:", bl)
             // issue tx
+
             for (let i = 0; i < iterations; i++) {
+                const outputsChunks = chunkArray(buildOutputs(userInfo), CHUNK_SIZE);
 
-                params = buildParams(userInfo)
+                for (let j = 0; j < outputsChunks.length; j++) {
+                    const params = {
+                        "outputs": outputsChunks[j],
+                        "from": [userInfo["x"]],
+                        "changeAddr": userInfo["x"],
+                        "memo": "hi, mom!",
+                        "username": userInfo.account.accountName,
+                        "password": userInfo.account.pwd
+                    };
 
-                // Call the function
-                const result = await requestProcessor(methodName, params);
-                console.log(i, ": results:", result, " \n")
-                waitTime = calculateWaitTime(result, waitTime)
-                // Delay for 100ms before the next invocation
-                await new Promise(resolve => setTimeout(resolve, waitTime));
+                    const result = await requestProcessor(methodName, params);
+                    console.log(i, j, ": results:", result, " \n");
+                    waitTime = calculateWaitTime(result, waitTime);
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                }
             }
         } else {
             console.error("Balance is wrong", bl)
@@ -74,6 +83,30 @@ function calculateWaitTime(result, waitTime) {
         console.error("How did you get here?")
     }
     return waitTime;
+}
+
+
+function chunkArray(array, size) {
+    const chunkedArray = [];
+    for (let i = 0; i < array.length; i += size) {
+        chunkedArray.push(array.slice(i, i + size));
+    }
+    return chunkedArray;
+}
+
+function buildOutputs(userInfo) {
+    const outputs = [];
+    const currentSetupKeys = fs.existsSync("accounts.json") ? JSON.parse(fs.readFileSync('accounts.json', 'utf8')) : setupKeys;
+
+    currentSetupKeys.forEach(element => {
+        outputs.push({
+            "assetID": assetID,
+            "amount": 1000,
+            "to": element.x
+        });
+    });
+
+    return outputs;
 }
 
 
