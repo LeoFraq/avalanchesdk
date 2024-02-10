@@ -14,7 +14,7 @@ const assetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 let methodName = 'avm.sendMultiple';
 let params = {};
 let iterations = 1
-const CHUNK_SIZE = 2000; // Define your chunk size
+const CHUNK_SIZE = 500; // Define your chunk size
 // Function to parse command-line arguments
 function parseCommandLineArgs() {
     iterations = process.argv[2];
